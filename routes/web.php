@@ -18,8 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/register', 'RegisterController@create')->name('register.create');
-Route::post('/register', 'RegisterController@pationstore')->name('register.pationstore');
-Route::post('/register', 'RegisterController@doctorstore')->name('register.doctorstore');
+Route::post('/register', 'RegisterController@store')->name('register.store');
+Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
+// Route::post('/register', 'RegisterController@doctorstore')->name('register.doctorstore');
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
 // Route::get('/solution', 'SolutionController@index')->name('solution');

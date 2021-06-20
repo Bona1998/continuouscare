@@ -14,7 +14,6 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -33,38 +32,40 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function pationstore(Request $request)
+    public function store(Request $request)
     {
-            
+        // // dd($request);
+
         $response = Http::post('http://waaasil.com/care/api/newUser', [
-            'fullName'=>$request->fullName,
-            'email'=>$request->email,
-            'userPhone'=>$request->userPhone,
-            'otp'=>123,
-            'userNotification'=>'hi there',
-            'password'=>$request->password,
-            'genderId'=>1,
-            'userLevel'=>2
-   
+            'fullName' => $request->fullName,
+            'email' => $request->email,
+            'userPhone' => $request->userPhone,
+            'otp' => 123,
+            'userNotification' => 'hi there',
+            'password' => $request->password,
+            'genderId' => $request->genderId,
+            'userLevel' => 2
+
         ]);
-        dd($response);
-  return $response->json();
+        // dd($response);
+ 
+        dd( $response->json());
     }
 
     public function doctorstore(Request $request)
     {
-            
+
         $response = Http::post('http://waaasil.com/care/api/updateProfile', [
-            'fullName'=>$request->fullName,
-            'email'=>$request->email,
-            'userPhone'=>$request->userPhone,
-            'otp'=>123,
-            'userNotification'=>'hi there',
-            'password'=>$request->password
-   
+            'fullName' => $request->fullName,
+            'email' => $request->email,
+            'userPhone' => $request->userPhone,
+            'otp' => 123,
+            'userNotification' => 'hi there',
+            'password' => $request->password
+
         ]);
         // dd($response);
-  return $response->json();
+        return $response->json();
     }
 
     /**

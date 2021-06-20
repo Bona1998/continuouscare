@@ -20,8 +20,9 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <h3 class="register-heading">Apply as a Patient</h3>
-                                    <form action="register.pationstore" method="POST">
+                                    <form action="/register" method="POST">
                                     <div class="row register-form">
+                                        @csrf
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="First Name *" value=""name="fullName" />
@@ -36,11 +37,11 @@
                                             <div class="form-group">
                                                 <div class="maxl">
                                                     <label class="radio inline"> 
-                                                        <input type="radio" name="gender" value="male" checked>
+                                                        <input type="radio" name="gender" id="1" value="male" checked>
                                                         <span> Male </span> 
                                                     </label>
                                                     <label class="radio inline"> 
-                                                        <input type="radio" name="gender" value="female">
+                                                        <input type="radio" name="gender" id="2" value="female">
                                                         <span>Female </span> 
                                                     </label>
                                                 </div>
@@ -62,7 +63,8 @@
                                     <h3  class="register-heading">Apply as a Doctor</h3>
                                     <div class="row register-form">
                                         <div class="col-md-6">
-                                            <form action="register.doctorstore" method="POST">
+                                            <form action="/doctor" method="POST">
+                                                @csrf
                                             <div class="form-group">
                                                 <input type="text" class="form-control" placeholder="First Name *" value="" name="fullName"/>
                                             </div>
