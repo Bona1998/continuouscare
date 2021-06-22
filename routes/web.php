@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Routing\RouteGroup;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::get('/login', 'PatientLoginController@create')->name('login.create');
+Route::post('/login', 'PatientLoginController@store')->name('login.store');
+Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.store');
+
 Route::get('/register', 'RegisterController@create')->name('register.create');
 Route::post('/register', 'RegisterController@store')->name('register.store');
 Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
@@ -28,8 +35,8 @@ Route::get('/product', 'ProductController@index')->name('product');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // RouteGroup()
-Route::get('/profile/{userId}','ProfileController@edit')->name('profile.edit');
-Route::put('/profile/{userId}','ProfileController@update')->name('profile.update');
+Route::get('/profile/{userId}', 'ProfileController@edit')->name('profile.edit');
+Route::put('/profile/{userId}', 'ProfileController@update')->name('profile.update');
 
 // // Auth::routes();
 

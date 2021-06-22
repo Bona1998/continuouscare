@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 
 class RegisterController extends Controller
@@ -34,7 +35,7 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        // // dd($request);
+        // dd($request);
 
         $response = Http::post('http://waaasil.com/care/api/newUser', [
             'fullName' => $request->fullName,
@@ -47,26 +48,11 @@ class RegisterController extends Controller
             'userLevel' => 2
 
         ]);
-        // dd($response);
- 
-        dd( $response->json());
+        dd($response);
+
+
     }
 
-    public function doctorstore(Request $request)
-    {
-
-        $response = Http::post('http://waaasil.com/care/api/updateProfile', [
-            'fullName' => $request->fullName,
-            'email' => $request->email,
-            'userPhone' => $request->userPhone,
-            'otp' => 123,
-            'userNotification' => 'hi there',
-            'password' => $request->password
-
-        ]);
-        // dd($response);
-        return $response->json();
-    }
 
     /**
      * Display the specified resource.
