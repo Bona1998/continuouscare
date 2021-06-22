@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class DoctorController extends Controller
+class DoctorLoginController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,24 +35,18 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
-        $response = Http::post('http://waaasil.com/care/api/newUser', [
-            'fullName' => $request->fullName,
+        $response = Http::get('http://waaasil.com/care/api/userLogin', [
             'email' => $request->email,
-            'userPhone' => $request->userPhone,
-            'otp' => 123,
-            'userNotification' => 'hi there',
             'password' => $request->password,
             'userLevel' => 1,
-            'genderId' => $request->genderId,
-
         ]);
 
-
-     
-        //  dd($response);
-
-        return $response->status();
+        if ($response->status() == 200) {
+            // auth()->use()->userId,
+            return view('home');
+        } else {
+            return back()->withErrors('Hmmm!', 'Sorry your credintioal dosn\'t  match our recorders !');
+        }
     }
 
     /**
