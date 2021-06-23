@@ -48,8 +48,8 @@ class RegisterController extends Controller
         //     'userLevel' => 2
 
         // ]);
-        $userId =Http::get('http://waaasil.com/care/api/newUser');
-        return view('otp',compact('userId'));
+        // $userId =Http::get('http://waaasil.com/care/api/newUser');
+        return view('otp',compact(35));
 
 
     }

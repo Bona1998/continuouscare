@@ -59,8 +59,8 @@ class ProfileController extends Controller
      */
     public function edit($userId)
     {
-        // $Profile = Profile::where('userId','=',$userId)->first();
-        return view('profile.edit',compact('userId'));
+        // $userId = Http::get('http://waaasil.com/care/api/newUser')->first();
+        return view('profile.edit',compact(35));
     }
 
     /**
@@ -72,20 +72,22 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        
-        $response = Http::post('http://waaasil.com/care/api/updateProfile', [
-            'userId'=>1,
-            'fullName'=>$request->fullName,
-            'stateId'=>$request->stateId,
-            'address'=>$request->address,
-            'hight'=>$request->hight,
-            'weight'=>$request->weight,
-            'bloodGroup'=>$request->bloodGroup,
-            'dateOfBirth'=>$request->dateOfBirth,
+        // $userId = Http::get('http://waaasil.com/care/api/newUser')::where('userId','=',$request)->first();
+        // $response = Http::post('http://waaasil.com/care/api/patientProfile', [
+        //     'userId'=>$request->userId,
+        //     'fullName'=>$request->fullName,
+        //     'stateId'=>$request->stateId,
+        //     'address'=>$request->address,
+        //     'hight'=>$request->hight,
+        //     'weight'=>$request->weight,
+        //     'bloodGroup'=>$request->bloodGroup,
+        //     'dateOfBirth'=>$request->dateOfBirth,
    
-        ]);
+        // ]);
         // dd($response);
-  return $response->json();
+//   return $response->json();
+           return view('comingSoon');
+
     }
 
     /**
