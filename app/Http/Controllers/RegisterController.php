@@ -41,14 +41,17 @@ class RegisterController extends Controller
             'fullName' => $request->fullName,
             'email' => $request->email,
             'userPhone' => $request->userPhone,
-            'otp' => 123,
+            'otp' => 999,
             'userNotification' => 'hi there',
             'password' => $request->password,
-            'genderId' => $request->genderId,
-            'userLevel' => 2
+            'genderId' => (int)$request->genderId,
+            'userLevel' => 1,
 
         ]);
-        dd($response);
+        // dd($response);
+        dd ($response->json());
+        // $userId =Http::get('http://waaasil.com/care/api/newUser');
+        // return view('otp',compact('userId'));
 
 
     }

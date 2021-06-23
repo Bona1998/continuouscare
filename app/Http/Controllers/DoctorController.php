@@ -40,19 +40,19 @@ class DoctorController extends Controller
             'fullName' => $request->fullName,
             'email' => $request->email,
             'userPhone' => $request->userPhone,
-            'otp' => 123,
-            'userNotification' => 'hi there',
+            'otp' => 147,
+            'userNotification' => 'welcome',
             'password' => $request->password,
-            'userLevel' => 1,
-            'genderId' => $request->genderId,
+            'genderId' => (int)$request->genderId,
+            'userLevel' => 2,
 
         ]);
 
 
-     
+
         //  dd($response);
 
-        return $response->status();
+        dd($response->json());
     }
 
     /**

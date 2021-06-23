@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Profile;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
 
-class ProfileController extends Controller
+class OtpController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-    
+        return view('otp');
     }
 
     /**
@@ -34,10 +33,9 @@ class ProfileController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    
+    public function store(Request $userId)
     {
-    
+        return view('profile.edit',compact($userId));
     }
 
     /**
@@ -57,10 +55,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($userId)
+    public function edit($id)
     {
-        // $Profile = Profile::where('userId','=',$userId)->first();
-        return view('profile.edit',compact('userId'));
+        //
     }
 
     /**
@@ -70,22 +67,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        
-        $response = Http::post('http://waaasil.com/care/api/updateProfile', [
-            'userId'=>1,
-            'fullName'=>$request->fullName,
-            'stateId'=>$request->stateId,
-            'address'=>$request->address,
-            'hight'=>$request->hight,
-            'weight'=>$request->weight,
-            'bloodGroup'=>$request->bloodGroup,
-            'dateOfBirth'=>$request->dateOfBirth,
-   
-        ]);
-        // dd($response);
-  return $response->json();
+        //
     }
 
     /**
