@@ -33,9 +33,10 @@ class OtpController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $userId)
+    public function store(Request $request)
     {
-        return view('profile.edit',compact($userId));
+        $userId = 35;
+        return view('profile.edit',compact('userId'));
     }
 
     /**
