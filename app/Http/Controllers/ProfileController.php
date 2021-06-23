@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -58,6 +59,7 @@ class ProfileController extends Controller
      */
     public function edit($userId)
     {
+        // $Profile = Profile::where('userId','=',$userId)->first();
         return view('profile.edit',compact('userId'));
     }
 

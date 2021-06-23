@@ -20,6 +20,9 @@ Route::get('/', function () {
 });
 
 
+
+Route::get('/otp', 'otpController@index')->name('otp');
+Route::get('/otp', 'otpController@store')->name('otp.store');
 Route::get('/login', 'PatientLoginController@create')->name('login.create');
 Route::post('/login', 'PatientLoginController@store')->name('login.store');
 Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.store');

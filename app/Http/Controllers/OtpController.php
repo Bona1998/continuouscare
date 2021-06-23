@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Http;
 
-class RegisterController extends Controller
+class OtpController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,6 +14,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
+        return view('otp');
     }
 
     /**
@@ -24,7 +24,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return view('register');
+        
     }
 
     /**
@@ -33,27 +33,10 @@ class RegisterController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $userId)
     {
-        // dd($request);
-
-        // $response = Http::post('http://waaasil.com/care/api/newUser', [
-        //     'fullName' => $request->fullName,
-        //     'email' => $request->email,
-        //     'userPhone' => $request->userPhone,
-        //     'otp' => $request->otp,
-        //     'userNotification' => 'hi there',
-        //     'password' => $request->password,
-        //     'genderId' => $request->genderId,
-        //     'userLevel' => 2
-
-        // ]);
-        $userId =Http::get('http://waaasil.com/care/api/newUser');
-        return view('otp',compact('userId'));
-
-
+        return view('profile.edit',compact($userId));
     }
-
 
     /**
      * Display the specified resource.
