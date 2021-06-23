@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/state', function () {
+    $response = Http::get(('http://waaasil.com/care/api/allState'));
+    return $response->json();   
+});
 
 
 Route::get('/login', 'PatientLoginController@create')->name('login.create');

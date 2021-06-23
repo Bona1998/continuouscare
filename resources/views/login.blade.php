@@ -10,11 +10,13 @@
             </div>
             <div class="col-md-9 register-right">
                 <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                    <li class="nav-item">
+                    <li class="nav-item {{ request()->is('home-tab') ? 'active' : ''}}">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                             aria-controls="home" aria-selected="true">Patient</a>
+                         
                     </li>
-                    <li class="nav-item">
+
+                    <li class="nav-item {{ request()->is('profile-tab') ? 'active' : ''}}">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                             aria-controls="profile" aria-selected="false">Doctor</a>
                     </li>
@@ -39,7 +41,10 @@
                                             name="password" id="password" />
                                     </div>
                                     <div>
+
+
                                         @include('errors.error')
+
                                     </div>
                                     <input type="submit" class="btnRegister" value="Login" />
                                 </div>
@@ -68,7 +73,10 @@
                                     <input type="password" class="form-control" placeholder=" Password *" value=""
                                         name="password " id="password" />
                                 </div>
+
+
                                 @include('errors.error')
+
                                 <input type="submit" class="btnRegister" value="Login" />
                             </div>
                         </div>

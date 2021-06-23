@@ -9,16 +9,20 @@
             </div>
             <div class="col-md-9 register-right">
                 <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
-                    <li class="nav-item">
+                
+
+                    <li class="nav-item <?php echo e(request()->is('#home') ? 'active' : ''); ?>">
                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                             aria-controls="home" aria-selected="true">Patient</a>
                     </li>
-                    <li class="nav-item">
+                 
+                    <li class="nav-item <?php echo e(request()->is('#profile') ? 'active' : ''); ?>">
                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
                             aria-controls="profile" aria-selected="false">Doctor</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
+                    <?php $currentPage = 'home';?>
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h3 class="register-heading">Apply as a Patient</h3>
                         <form action="/register" method="POST">
@@ -68,6 +72,7 @@
 
 
                     
+                    <?php $currentPage = 'profile';?>
                     <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h3 class="register-heading">Apply as a Doctor</h3>
                         <div class="row register-form">
