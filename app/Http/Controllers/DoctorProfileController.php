@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\ViewErrorBag;
-use Symfony\Component\VarDumper\Cloner\Data;
 
-class RegisterController extends Controller
+class DoctorProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,6 +14,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
+        //
     }
 
     /**
@@ -26,7 +24,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        return view('register');
+        return view('doctorProfile.create');
     }
 
     /**
@@ -38,29 +36,22 @@ class RegisterController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-
-        $response = Http::post('http://waaasil.com/care/api/newUser', [
+        $response = Http::post('http://waaasil.com/care/api/updateDoctorProfile', [
+            'userId' => $request->userId,
             'fullName' => $request->fullName,
-            'email' => $request->email,
-            'userPhone' => $request->userPhone,
-            'otp' => 100,
-            'userNotification' => 'hi there',
-            'password' => $request->password,
-            'genderId' => (int)$request->genderId,
-            'userLevel' => 2,
-
+            'bio' => $request->bio,
+            'roleJob_id' => $request->roleJob_id,
+            'stateId' => $request->stateId,
+            'address' => $request->address,
         ]);
 
         $data = json_decode($response->getBody());
-
-        $id = $data->userId;
         if ($data->code == 200) {
-            return view('profile.create', compact('id'));
+            return view('/comingSoon');
         } else {
-            return view('errors.403');
+            return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
         }
     }
-
 
     /**
      * Display the specified resource.

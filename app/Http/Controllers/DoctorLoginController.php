@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Http;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class DoctorLoginController extends Controller
 {
@@ -35,17 +37,21 @@ class DoctorLoginController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::get('http://waaasil.com/care/api/userLogin', [
-            'email' => $request->email,
+        // dd($request);
+        $response = Http::post('http://waaasil.com/care/api/userLogin', [
+            'userName' => $request->userName,
             'password' => $request->password,
             'userLevel' => 1,
         ]);
 
-        if ($response->status() == 200) {
-            // auth()->use()->userId,
-            return view('home');
+        $data = json_decode($response->getBody());
+        
+        dd($data);
+
+        if ($data->code == 200) {
+            return redirect('/comingSoon');
         } else {
-            return back()->withErrors('Hmmm!', 'Sorry your credintioal dosn\'t  match our recorders !');
+            return back()->withErrors(['Hmmm!', 'Sorry your credintioal dosn\'t  match our recorders !']);
         }
     }
 

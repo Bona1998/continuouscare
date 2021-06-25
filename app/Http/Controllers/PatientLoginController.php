@@ -15,7 +15,6 @@ class PatientLoginController extends Controller
      */
     public function index()
     {
-       
     }
 
     /**
@@ -36,15 +35,19 @@ class PatientLoginController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::get('http://waaasil.com/care/api/userLogin', [
-            'email' => $request->email,
+        // dd($request);
+        $response = Http::post('http://waaasil.com/care/api/userLogin', [
+            'userName' => $request->userName,
             'password' => $request->password,
             'userLevel' => 2,
         ]);
 
-        if ($response->status() == 200) {
-            // auth()->use()->userId,
-            return view('home');
+        $data = json_decode($response->getBody());
+
+
+
+        if ($data->code == 200) {
+            return view('comingSoon');
         } else {
             return back()->withErrors(['Hmmm!', 'Sorry your credintioal dosn\'t  match our recorders !']);
         }

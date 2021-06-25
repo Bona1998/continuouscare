@@ -20,13 +20,15 @@ Route::get('/', function () {
 });
 Route::get('/state', function () {
     $response = Http::get(('http://waaasil.com/care/api/allState'));
-    return $response->json();   
+    return $response->json();
 });
 
-
+Route::get('/comingSoon', function () {
+    return view('comingSoon');
+});
 
 Route::get('/otp', 'otpController@index')->name('otp');
-Route::get('/otp', 'otpController@store')->name('otp.store');
+Route::post('/otp', 'otpController@store')->name('otp.store');
 Route::get('/login', 'PatientLoginController@create')->name('login.create');
 Route::post('/login', 'PatientLoginController@store')->name('login.store');
 Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.store');
@@ -42,8 +44,14 @@ Route::get('/product', 'ProductController@index')->name('product');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // RouteGroup()
-Route::get('/profile/{userId}', 'ProfileController@edit')->name('profile.edit');
-Route::put('/profile/{userId}', 'ProfileController@update')->name('profile.update');
+
+Route::get('/profile', 'ProfileController@create')->name('profile.create');
+
+Route::post('/profile', 'ProfileController@store')->name('profile.store');
+
+Route::get('/doctorProfile', 'DoctorProfileController@create')->name('doctorProfile.create');
+
+Route::post('/doctorprofile', 'DoctorProfileController@store')->name('doctorProfile.store');
 
 // // Auth::routes();
 
