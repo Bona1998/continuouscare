@@ -19,12 +19,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/state', function () {
-    $response = Http::get(('http://waaasil.com/care/api/doctorProfile'),[
-        'userId'=>7,
-    ]);
-    return $response->json();
 });
-
+// Manger
+// Dentist
+// Pediatrician
 Route::get('/comingSoon', function () {
     return view('comingSoon');
 });
