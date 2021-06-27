@@ -19,7 +19,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/state', function () {
-    $response = Http::get(('http://waaasil.com/care/api/allState'));
+    $response = Http::get(('http://waaasil.com/care/api/doctorProfile'),[
+        'userId'=>7,
+    ]);
     return $response->json();
 });
 

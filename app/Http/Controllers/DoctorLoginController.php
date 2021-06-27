@@ -46,7 +46,7 @@ class DoctorLoginController extends Controller
 
         $data = json_decode($response->getBody());
         
-        dd($data);
+        // dd($data);
 
         if ($data->code == 200) {
             return redirect('/comingSoon');

@@ -36,7 +36,26 @@ class DoctorProfileController extends Controller
      */
     public function store(Request $request)
     {
-    
+        $response = Http::post('http://waaasil.com/care/api/updateDoctorProfile', [
+            'userId'=>$request->userId,
+            'fullName'=>$request->fullName,
+            'stateId'=>$request->stateId,
+            'address'=>$request->address,
+            'hight'=>$request->hight,
+            'weight'=>$request->weight,
+            'bloodGroup'=>$request->bloodGroup,
+        ]);
+        $data= json_decode($response->getBody());
+
+        if ($data->code == 200) {
+            return view('comingSoon');
+            // session()->flash('');
+        }else
+        {
+            
+        return redirect('errors.404');
+
+        }
     }
 
     /**
@@ -70,20 +89,7 @@ class DoctorProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $response = Http::post('http://waaasil.com/care/api/patientProfile', [
-            'userId'=>$request->userId,
-            'fullName'=>$request->fullName,
-            'stateId'=>$request->stateId,
-            'address'=>$request->address,
-            'hight'=>$request->hight,
-            'weight'=>$request->weight,
-            'bloodGroup'=>$request->bloodGroup,
-            'dateOfBirth'=>$request->dateOfBirth,
-   
-        ]);
-           dd($response);
-           return $response->json();
-           return view('comingSoon');
+      
     }
 
     /**

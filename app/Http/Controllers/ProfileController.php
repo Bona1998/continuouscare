@@ -101,13 +101,18 @@ class ProfileController extends Controller
             'dateOfBirth' => $request->dateOfBirth,
         ]);
 
+        $data= json_decode($response->getBody());
 
-        if ($response->code == 200) {
-            return view('/profile');
+        if ($$data->code == 200) {
+            return view('comingSoon');
             // session()->flash('');
+        }else
+        {
+            
+        return redirect('errors.404');
+
         }
 
-        return view('comingSoon');
     }
 
     /**
