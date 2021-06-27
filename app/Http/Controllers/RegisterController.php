@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ViewErrorBag;
 use Symfony\Component\VarDumper\Cloner\Data;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -37,13 +38,14 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
 
+
+        $code = Str::random(5);
         $response = Http::post('http://waaasil.com/care/api/newUser', [
             'fullName' => $request->fullName,
             'email' => $request->email,
             'userPhone' => $request->userPhone,
-            'otp' => 100,
+            'otp' => $code,
             'userNotification' => 'hi there',
             'password' => $request->password,
             'genderId' => (int)$request->genderId,
@@ -51,11 +53,17 @@ class RegisterController extends Controller
 
         ]);
 
-        $data = json_decode($response->getBody());
 
+        // $Allstate = Http::get('http://waaasil.com/care/api/allState');
+        // $state = json_decode($Allstate->getBody(), true);
+        // $stId = $state['data']['0']['stateId'];
+        // $stName = $state['data']['0']['stateName'];
+
+        $data = json_decode($response->getBody());
         $id = $data->userId;
+
         if ($data->code == 200) {
-            return view('profile.create', compact('id'));
+            return view('profile.create', compact('id',));
         } else {
             return view('errors.403');
         }

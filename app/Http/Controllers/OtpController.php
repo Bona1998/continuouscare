@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class OtpController extends Controller
 {
@@ -35,6 +36,7 @@ class OtpController extends Controller
      */
     public function store(Request $request)
     {
+        $code = Str::random(5); 
         $userId = 35;
         return view('profile.edit',compact('userId'));
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class DoctorController extends Controller
 {
@@ -36,11 +37,12 @@ class DoctorController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+        $code = Str::random(5);
         $response = Http::post('http://waaasil.com/care/api/newUser', [
             'fullName' => $request->fullName,
             'email' => $request->email,
             'userPhone' => $request->userPhone,
-            'otp' => 147,
+            'otp' => $code,
             'userNotification' => 'welcome',
             'password' => $request->password,
             'genderId' => (int)$request->genderId,

@@ -19,10 +19,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/state', function () {
-    $response = Http::get(('http://waaasil.com/care/api/allState'));
+    $response = Http::get(('http://waaasil.com/care/api/patientProfile'), [
+        'userId' => 102,
+    ]);
     return $response->json();
 });
-
+// Manger
+// Asist
+// Dentist
+// Pediatrician
 Route::get('/comingSoon', function () {
     return view('comingSoon');
 });

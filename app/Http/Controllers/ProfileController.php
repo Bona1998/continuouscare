@@ -25,8 +25,9 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
+
     {
-        return view('profile.create');
+        return view('profile.create',);
     }
 
     /**
@@ -38,7 +39,10 @@ class ProfileController extends Controller
     public function store(Request $request)
 
     {
-        // dd($request);
+
+
+
+
         $response = Http::post('http://waaasil.com/care/api/updatePatientProfile', [
             'userId' => $request->userId,
             'fullName' => $request->fullName,
@@ -47,7 +51,7 @@ class ProfileController extends Controller
             'hight' => $request->hight,
             'weight' => $request->weight,
             'bloodGroup' => $request->bloodGroup,
-          
+
         ]);
         $data = json_decode($response->getBody());
         if ($data->code == 200) {
