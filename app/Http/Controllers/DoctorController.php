@@ -44,15 +44,19 @@ class DoctorController extends Controller
             'userNotification' => 'welcome',
             'password' => $request->password,
             'genderId' => (int)$request->genderId,
-            'userLevel' => 2,
+            'userLevel' => 1,
 
         ]);
 
+        $data = json_decode($response->getBody());
 
+        $id = $data->userId;
 
-        //  dd($response);
-
-        dd($response->json());
+        if ($data->code == 200) {
+            return view('doctorProfile.create', compact('id'));
+        } else {
+            return view('errors.403');
+        }
     }
 
     /**

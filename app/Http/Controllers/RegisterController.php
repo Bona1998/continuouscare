@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\ViewErrorBag;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class RegisterController extends Controller
 {
@@ -41,19 +43,22 @@ class RegisterController extends Controller
             'fullName' => $request->fullName,
             'email' => $request->email,
             'userPhone' => $request->userPhone,
-            'otp' => 999,
+            'otp' => 100,
             'userNotification' => 'hi there',
             'password' => $request->password,
             'genderId' => (int)$request->genderId,
-            'userLevel' => 1,
+            'userLevel' => 2,
 
         ]);
-        // dd($response);
-        dd ($response->json());
-        // $userId =Http::get('http://waaasil.com/care/api/newUser');
-        // return view('otp',compact('userId'));
 
+        $data = json_decode($response->getBody());
 
+        $id = $data->userId;
+        if ($data->code == 200) {
+            return view('profile.create', compact('id'));
+        } else {
+            return view('errors.403');
+        }
     }
 
 
