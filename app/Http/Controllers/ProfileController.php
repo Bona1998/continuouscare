@@ -51,6 +51,8 @@ class ProfileController extends Controller
             'hight' => $request->hight,
             'weight' => $request->weight,
             'bloodGroup' => $request->bloodGroup,
+            'dateOfBirth' => $request->dateOfBirth,
+            
 
         ]);
         $data = json_decode($response->getBody());

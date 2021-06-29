@@ -55,10 +55,10 @@
                 </select>
             </div>
 
-            {{-- <div class="">
+            <div class="">
         <label class="block text-sm text-gray-600" for="cus_name">Date Of Birth</label>
-        <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="date" name="date" type="text" required="" placeholder="MM/YY CVC" aria-label="Name">
-      </div> --}}
+        <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="date" name="dateOfBirth" type="date" required="" placeholder="MM/YY CVC" aria-label="Name">
+      </div>
             <div class="mt-4">
                 <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
                     type="submit">Save</button>
