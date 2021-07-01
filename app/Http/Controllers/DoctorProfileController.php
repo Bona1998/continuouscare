@@ -24,6 +24,7 @@ class DoctorProfileController extends Controller
      */
     public function create()
     {
+
         return view('doctorProfile.create');
     }
 
@@ -35,7 +36,7 @@ class DoctorProfileController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+
         $response = Http::post('http://waaasil.com/care/api/updateDoctorProfile', [
             'userId' => $request->userId,
             'fullName' => $request->fullName,

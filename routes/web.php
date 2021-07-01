@@ -18,12 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/state', function () {
-    $response = Http::get(('http://waaasil.com/care/api/patientProfile'), [
-        'userId' => 102,
-    ]);
-    return $response->json();
+Route::get('/role', function () {
+    $response = Http::get('http://waaasil.com/care/api/role');
+    dd($response['data'][0]);
 });
+Route::get('/space', function () {
+    $response = Http::get('http://waaasil.com/care/api/specialization');
+    dd($response->json());
+});
+
 // Manger
 // Asist
 // Dentist
