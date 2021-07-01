@@ -41,6 +41,9 @@ Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.st
 Route::get('/register', 'RegisterController@create')->name('register.create');
 Route::post('/register', 'RegisterController@store')->name('register.store');
 Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
+
+Route::get('/imageprofile', 'ImagesProfile@create')->name('imageprofile.create');
+Route::post('/imageprofile', 'ImagesProfile@store')->name('imageprofile.store');
 // Route::post('/register', 'RegisterController@doctorstore')->name('register.doctorstore');
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
