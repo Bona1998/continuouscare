@@ -44,7 +44,7 @@ class DoctorController extends Controller
 
         $res = Http::get('http://waaasil.com/care/api/specialization');
         $space=json_decode($res->getBody(),true);
-        $allSpeace=$space['data'];
+        $allSpecialization=$space['data'];
 
         $res = Http::get('http://waaasil.com/care/api/role');
 
@@ -72,7 +72,7 @@ class DoctorController extends Controller
         $id = $data->userId;
 
         if ($data->code == 200) {
-            return view('doctorProfile.create', compact('id','allState','allRoles'))->with('spaces',$allSpeace);
+            return view('doctorProfile.create', compact('id','allState','allRoles','allSpecialization'));
         } else {
             return view('errors.403');
         }
@@ -122,4 +122,8 @@ class DoctorController extends Controller
     {
         //
     }
+
+    // Get average runtime of successful runs in seconds
+    
+
 }

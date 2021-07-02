@@ -41,12 +41,13 @@ class DoctorProfileController extends Controller
             'userId' => $request->userId,
             'fullName' => $request->fullName,
             'bio' => $request->bio,
-            'roleJob_id' => $request->roleJob_id,
+            'rolejob_id' => $request->rolejob_id,
             'stateId' => $request->stateId,
             'address' => $request->address,
+            'specialized_id' => $request->specialized_id
         ]);
-
         $data = json_decode($response->getBody());
+
         if ($data->code == 200) {
             return view('/comingSoon');
         } else {
