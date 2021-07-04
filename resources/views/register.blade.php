@@ -125,3 +125,6 @@
                 </div>
 
             @endsection
+            <script>
+               window.localStorage.setItem('userId', JSON.stringify(userId));  
+            </script>
