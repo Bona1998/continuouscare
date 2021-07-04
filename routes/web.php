@@ -18,8 +18,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/state', function () {
+Route::get('/role', function () {
+    $response = Http::get('http://waaasil.com/care/api/role');
+    dd($response['data'][0]);
 });
+Route::get('/space', function () {
+    $response = Http::get('http://waaasil.com/care/api/specialization');
+    dd($response->json());
+});
+
 // Manger
 // Dentist
 // Pediatrician
@@ -36,6 +43,9 @@ Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.st
 Route::get('/register', 'RegisterController@create')->name('register.create');
 Route::post('/register', 'RegisterController@store')->name('register.store');
 Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
+
+Route::get('/imageprofile', 'ImagesProfile@create')->name('imageprofile.create');
+Route::post('/imageprofile', 'ImagesProfile@store')->name('imageprofile.store');
 // Route::post('/register', 'RegisterController@doctorstore')->name('register.doctorstore');
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/pricing', 'PricingController@index')->name('pricing');

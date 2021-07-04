@@ -38,6 +38,11 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
+        $response = Http::get('http://waaasil.com/care/api/allState');
+
+        $state = json_decode($response->getBody(), true);
+
+        $allState = $state['data'];
 
         $code = Str::random(5);
         $response = Http::post('http://waaasil.com/care/api/newUser', [
@@ -51,22 +56,13 @@ class RegisterController extends Controller
             'userLevel' => 2,
 
         ]);
+       
 
-
-        // $Allstate = Http::get('http://waaasil.com/care/api/allState');
-        // $state = json_decode($Allstate->getBody(), true);
-        // $stId = $state['data']['0']['stateId'];
-        // $stName = $state['data']['0']['stateName'];
-        $Allstate = Http::get('http://waaasil.com/care/api/allState');
-         $state = json_decode($Allstate->getBody(), true);
-        $st = $state['data'];
-        // $stName = $state['data']['0'][];
-// dd($st);
         $data = json_decode($response->getBody());
         $id = $data->userId;
         $request->session()->put('id',$request->input());
         if ($data->code == 200) {
-            return view('profile.create', compact('id'))->with('sat',$st);
+            return view('profile.create', compact('id'))->with('state', $allState);
         } else {
             return view('errors.403');
         }

@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
-class DoctorProfileController extends Controller
+class ImagesProfile extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,8 +24,7 @@ class DoctorProfileController extends Controller
      */
     public function create()
     {
-
-        return view('doctorProfile.create');
+        return view('imageprofile.create');
     }
 
     /**
@@ -37,27 +35,10 @@ class DoctorProfileController extends Controller
      */
     public function store(Request $request)
     {
-
-        $response = Http::post('http://waaasil.com/care/api/updateDoctorProfile', [
-            'userId' => $request->userId,
-            'fullName' => $request->fullName,
-            'bio' => $request->bio,
-            'rolejob_id' => $request->rolejob_id,
-            'stateId' => $request->stateId,
-            'address' => $request->address,
-            'specialized_id' => $request->specialized_id
+        $response = Http::post('http://waaasil.com/care/api/saveProfileImages', [
+            'userId' => 1,
         ]);
-        $data = json_decode($response->getBody());
-
-        if ($data->code == 200) {
-            return view('comingSoon');
-            // session()->flash('');
-        }else
-        {
-            
-        return redirect('errors.404');
-
-        }
+        return $response->json();
     }
 
     /**
@@ -79,7 +60,7 @@ class DoctorProfileController extends Controller
      */
     public function edit($id)
     {
-        return view('profile.edit',compact(34));
+        //
     }
 
     /**
@@ -91,7 +72,7 @@ class DoctorProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-      
+        //
     }
 
     /**

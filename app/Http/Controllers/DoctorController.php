@@ -25,7 +25,6 @@ class DoctorController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -36,7 +35,24 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        $response = Http::get('http://waaasil.com/care/api/allState');
+
+        $state = json_decode($response->getBody(), true);
+
+        $allState = $state['data'];
+
+
+        $res = Http::get('http://waaasil.com/care/api/specialization');
+        $space=json_decode($res->getBody(),true);
+        $allSpecialization=$space['data'];
+
+        $res = Http::get('http://waaasil.com/care/api/role');
+
+        $roles = json_decode($res->getBody(), true);
+
+        $allRoles = $roles['data'];
+      
+
         $code = Str::random(5);
         $response = Http::post('http://waaasil.com/care/api/newUser', [
             'fullName' => $request->fullName,
@@ -50,12 +66,13 @@ class DoctorController extends Controller
 
         ]);
 
+
         $data = json_decode($response->getBody());
 
         $id = $data->userId;
 
         if ($data->code == 200) {
-            return view('doctorProfile.create', compact('id'));
+            return view('doctorProfile.create', compact('id','allState','allRoles','allSpecialization'));
         } else {
             return view('errors.403');
         }
@@ -105,4 +122,8 @@ class DoctorController extends Controller
     {
         //
     }
+
+    // Get average runtime of successful runs in seconds
+    
+
 }

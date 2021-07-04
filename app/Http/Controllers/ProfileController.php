@@ -27,8 +27,9 @@ class ProfileController extends Controller
     public function create()
 
     {
-       
-        
+
+
+
         return view('profile.create');
     }
 
@@ -53,8 +54,7 @@ class ProfileController extends Controller
             
 
         ]);
-       
-        
+        // dd($request);
         $data = json_decode($response->getBody());
         if ($data->code == 200) {
             return view('/comingSoon');
