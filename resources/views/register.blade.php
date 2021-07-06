@@ -6,7 +6,7 @@
                 <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
                 <h3>Welcome</h3>
                 <p>You are !</p>
-                <a href="{{ asset('/login') }}"><input type="submit" name="" value="Login" /><br /></a>
+                <a href="{{ asset('/loginCustom') }}"><input type="submit" name="" value="Login" /><br /></a>
             </div>
             <div class="col-md-9 register-right">
                 <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -26,7 +26,7 @@
                     <?php $currentPage = 'home'; ?>
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h3 class="register-heading">Apply as a Patient</h3>
-                        <form action="{{ asset('/register') }}" method="POST">
+                        <form action="{{ asset('/registerCustom') }}" method="POST">
                             <div class="row register-form">
                                 @csrf
                                 <div class="col-md-6">

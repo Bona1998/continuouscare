@@ -1,4 +1,3 @@
-{{session('id')}}
 @extends('layouts.mainlayout')
 
 @section('content')
@@ -72,12 +71,22 @@
                 <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="date" name="date" type="text"
                     required="" placeholder="MM/YY CVC" aria-label="Name">
             </div>
+            <div >
+                <input type="file" id="image" name="image">
+                <button type="submit" class="btn btn-primary">Upload Image</button>
+            </div>
             <div class="mt-4">
                 <button class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
                     type="submit">Save</button>
                 <input type="hidden" name="userId" value="{{ $id }}">
             </div>
         </form>
-    </div>
+        {{-- <form action="{{ route('imageprofile.store') }}" method="POST">
+            @csrf
+            <input type="file" id="image" name="image">
+            <button type="submit" class="btn btn-primary">Upload Image</button>
+            {{-- <input type="hidden" name="userId" value="{{ $id }}"> --}}
+        {{-- </form> --}} 
     
+    </div>
 @endsection

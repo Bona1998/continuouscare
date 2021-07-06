@@ -51,9 +51,11 @@ class ProfileController extends Controller
             'weight' => $request->weight,
             'bloodGroup' => $request->bloodGroup,
             'dateOfBirth' => $request->dateOfBirth,
-            
+           
 
         ]);
+        $response = Http::post('http://waaasil.com/care/api/saveProfileImages', [
+            'userId' => $request->userId,]);
         // dd($request);
         $data = json_decode($response->getBody());
         if ($data->code == 200) {

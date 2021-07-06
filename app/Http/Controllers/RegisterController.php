@@ -60,7 +60,7 @@ class RegisterController extends Controller
 
         $data = json_decode($response->getBody());
         $id = $data->userId;
-        $request->session()->put('id',$request->input());
+
         if ($data->code == 200) {
             return view('profile.create', compact('id'))->with('state', $allState);
         } else {

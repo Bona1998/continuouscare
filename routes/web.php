@@ -15,17 +15,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/role', function () {
-    $response = Http::get('http://waaasil.com/care/api/role');
-    dd($response['data'][0]);
-});
-Route::get('/space', function () {
-    $response = Http::get('http://waaasil.com/care/api/specialization');
-    dd($response->json());
-});
+// Route::get('/', function () {
+    
+//     return view('welcome');
+// });
+// Route::get('/role', function () {
+//     $response = Http::get('http://waaasil.com/care/api/role');
+//     dd($response['data'][0]);
+// });
+// Route::get('/space', function () {
+//     $response = Http::get('http://waaasil.com/care/api/specialization');
+//     dd($response->json());
+// });
 
 // Manger
 // Dentist
@@ -33,15 +34,15 @@ Route::get('/space', function () {
 Route::get('/comingSoon', function () {
     return view('comingSoon');
 });
-
+Route::get('/', 'WelcomeController@index')->name('/');
 Route::get('/otp', 'otpController@index')->name('otp');
 Route::post('/otp', 'otpController@store')->name('otp.store');
-Route::get('/login', 'PatientLoginController@create')->name('login.create');
-Route::post('/login', 'PatientLoginController@store')->name('login.store');
+Route::get('/loginCustom', 'PatientLoginController@create')->name('login.create');
+Route::post('/loginCustom', 'PatientLoginController@store')->name('login.store');
 Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.store');
 
-Route::get('/register', 'RegisterController@create')->name('register.create');
-Route::post('/register', 'RegisterController@store')->name('register.store');
+Route::get('/registerCustom', 'RegisterController@create')->name('register.create');
+Route::post('/registerCustom', 'RegisterController@store')->name('register.store');
 Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
 
 Route::get('/imageprofile', 'ImagesProfile@create')->name('imageprofile.create');
@@ -50,7 +51,7 @@ Route::post('/imageprofile', 'ImagesProfile@store')->name('imageprofile.store');
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
 // Route::get('/solution', 'SolutionController@index')->name('solution');
-Route::get('/product', 'ProductController@index')->name('product');
+
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // RouteGroup()
@@ -63,17 +64,23 @@ Route::get('/doctorProfile', 'DoctorProfileController@create')->name('doctorProf
 
 Route::post('/doctorprofile', 'DoctorProfileController@store')->name('doctorProfile.store');
 
-// // Auth::routes();
+Auth::routes();
 
-// // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 // Auth::routes(['verify' => true]);
 
 // Route::get('/home', 'HomeController@index')->middleware('verified');
 
-Route::resource('categories', 'CategoryController');
 
-Route::resource('services', 'servicesController');
 
-Route::resource('abouts', 'aboutController');
+Route::get('/product', 'ProductController@index')->name('product');
+
+Route::resource('brifDescriptions', 'BrifDescriptionController');
+
+Route::resource('services', 'ServicesController');
+
+Route::resource('reviwes', 'ReviwesController');
+
+Route::resource('goals', 'GoalsController');

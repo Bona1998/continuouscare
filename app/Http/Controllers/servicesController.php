@@ -2,26 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateservicesRequest;
-use App\Http\Requests\UpdateservicesRequest;
-use App\Repositories\servicesRepository;
+use App\Http\Requests\CreateServicesRequest;
+use App\Http\Requests\UpdateServicesRequest;
+use App\Repositories\ServicesRepository;
 use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
 use Flash;
 use Response;
 
-class servicesController extends AppBaseController
+class ServicesController extends AppBaseController
 {
-    /** @var  servicesRepository */
+    /** @var  ServicesRepository */
     private $servicesRepository;
 
-    public function __construct(servicesRepository $servicesRepo)
+    public function __construct(ServicesRepository $servicesRepo)
     {
         $this->servicesRepository = $servicesRepo;
     }
 
     /**
-     * Display a listing of the services.
+     * Display a listing of the Services.
      *
      * @param Request $request
      *
@@ -36,7 +36,7 @@ class servicesController extends AppBaseController
     }
 
     /**
-     * Show the form for creating a new services.
+     * Show the form for creating a new Services.
      *
      * @return Response
      */
@@ -46,17 +46,17 @@ class servicesController extends AppBaseController
     }
 
     /**
-     * Store a newly created services in storage.
+     * Store a newly created Services in storage.
      *
-     * @param CreateservicesRequest $request
+     * @param CreateServicesRequest $request
      *
      * @return Response
      */
-    public function store(CreateservicesRequest $request)
+    public function store(CreateServicesRequest $request)
     {
         $input = $request->all();
 
-        $services = $this->servicesRepository->create($input);
+        $services = $this->servicesRepository->createPost($request);
 
         Flash::success('Services saved successfully.');
 
@@ -64,7 +64,7 @@ class servicesController extends AppBaseController
     }
 
     /**
-     * Display the specified services.
+     * Display the specified Services.
      *
      * @param int $id
      *
@@ -84,7 +84,7 @@ class servicesController extends AppBaseController
     }
 
     /**
-     * Show the form for editing the specified services.
+     * Show the form for editing the specified Services.
      *
      * @param int $id
      *
@@ -104,14 +104,14 @@ class servicesController extends AppBaseController
     }
 
     /**
-     * Update the specified services in storage.
+     * Update the specified Services in storage.
      *
      * @param int $id
-     * @param UpdateservicesRequest $request
+     * @param UpdateServicesRequest $request
      *
      * @return Response
      */
-    public function update($id, UpdateservicesRequest $request)
+    public function update($id, UpdateServicesRequest $request)
     {
         $services = $this->servicesRepository->find($id);
 
@@ -129,7 +129,7 @@ class servicesController extends AppBaseController
     }
 
     /**
-     * Remove the specified services from storage.
+     * Remove the specified Services from storage.
      *
      * @param int $id
      *

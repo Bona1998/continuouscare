@@ -4,10 +4,16 @@
     <p>{{ $services->name }}</p>
 </div>
 
-<!-- Descption Field -->
+<!-- Description Field -->
 <div class="col-sm-12">
-    {!! Form::label('descption', 'Descption:') !!}
-    <p>{{ $services->descption }}</p>
+    {!! Form::label('description', 'Description:') !!}
+    <p>{{ $services->description }}</p>
+</div>
+
+<!-- Image Url Field -->
+<div class="col-sm-12">
+    {!! Form::label('image_url', 'Image Url:') !!}
+    <p>{{ $services->image_url }}</p>
 </div>
 
 <!-- Created At Field -->

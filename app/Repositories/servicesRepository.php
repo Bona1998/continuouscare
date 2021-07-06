@@ -2,23 +2,26 @@
 
 namespace App\Repositories;
 
-use App\Models\services;
+use App\Models\Services;
 use App\Repositories\BaseRepository;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 /**
- * Class servicesRepository
+ * Class ServicesRepository
  * @package App\Repositories
- * @version June 17, 2021, 9:54 am UTC
+ * @version July 4, 2021, 3:24 pm UTC
 */
 
-class servicesRepository extends BaseRepository
+class ServicesRepository extends BaseRepository
 {
     /**
      * @var array
      */
     protected $fieldSearchable = [
         'name',
-        'descption'
+        'description',
+        'image_url'
     ];
 
     /**
@@ -36,6 +39,20 @@ class servicesRepository extends BaseRepository
      **/
     public function model()
     {
-        return services::class;
+        return Services::class;
+    }
+    public function createPost(Request $request){
+        $file = $request->file('image_url');
+        $originalName = $file->getClientOriginalName();
+        $extension = $file->getClientOriginalExtension();
+
+        $path = 'upload/'.uniqid().'.'.$extension;
+        $img = Image::make($file);
+        $img->save(public_path($path));
+
+        $input = $request->all();
+        $input['image_url'] = $path;
+       
+        return $this->create($input);
     }
 }
