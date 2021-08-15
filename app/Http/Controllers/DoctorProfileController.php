@@ -29,14 +29,28 @@ class DoctorProfileController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ************************************************
+     * http://waaasil.com/care/api/updateDoctorProfile
+     * 
+     * ************************************************
+     *  recive user id form registion process
+     * 
+     * send http post requset to api to make profile
+     * 
+     * with sended data
+     * 
+     * resiving response from serve and 
+     * 
+     * decode it and checking the status of it 
      *
+     * 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-
+        $id = $request->userId;
         $response = Http::post('http://waaasil.com/care/api/updateDoctorProfile', [
             'userId' => $request->userId,
             'fullName' => $request->fullName,
@@ -49,10 +63,9 @@ class DoctorProfileController extends Controller
         $data = json_decode($response->getBody());
 
         if ($data->code == 200) {
-            return view('/comingSoon');
-        } else {
-            return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
+            return view('imageprofile.create', compact('id'));
         }
+        return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
     }
 
     /**

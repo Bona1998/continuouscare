@@ -1,4 +1,4 @@
-@if (count($errors))
+@if(count($errors))
 
     <div class="form-group">
         <div style="color: red">

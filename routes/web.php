@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -35,43 +36,35 @@ Route::get('/comingSoon', function () {
     return view('comingSoon');
 });
 
-Route::get('/otp', 'otpController@index')->name('otp');
-Route::post('/otp', 'otpController@store')->name('otp.store');
 Route::get('/login', 'PatientLoginController@create')->name('login.create');
 Route::post('/login', 'PatientLoginController@store')->name('login.store');
-Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.store');
-
 Route::get('/register', 'RegisterController@create')->name('register.create');
 Route::post('/register', 'RegisterController@store')->name('register.store');
+Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.store');
 Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
+
+
+Route::get('/otp', 'otpController@index')->name('otp');
+Route::post('/otp', 'otpController@store')->name('otp.store');
 
 Route::get('/imageprofile', 'ImagesProfile@create')->name('imageprofile.create');
 Route::post('/imageprofile', 'ImagesProfile@store')->name('imageprofile.store');
-// Route::post('/register', 'RegisterController@doctorstore')->name('register.doctorstore');
+
 Route::get('/about', 'AboutController@index')->name('about');
 Route::get('/pricing', 'PricingController@index')->name('pricing');
-// Route::get('/solution', 'SolutionController@index')->name('solution');
+
 Route::get('/product', 'ProductController@index')->name('product');
 
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // RouteGroup()
 
-Route::get('/profile', 'ProfileController@create')->name('profile.create');
+Route::get('/profile', 'PatientProfileController@create')->name('profile.create');
 
-Route::post('/profile', 'ProfileController@store')->name('profile.store');
+Route::post('/profile', 'PatientProfileController@store')->name('profile.store');
 
 Route::get('/doctorProfile', 'DoctorProfileController@create')->name('doctorProfile.create');
 
 Route::post('/doctorprofile', 'DoctorProfileController@store')->name('doctorProfile.store');
-
-// // Auth::routes();
-
-// // Route::get('/home', 'HomeController@index')->name('home');
-
-
-// Auth::routes(['verify' => true]);
-
-// Route::get('/home', 'HomeController@index')->middleware('verified');
 
 Route::resource('categories', 'CategoryController');
 

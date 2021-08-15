@@ -3,7 +3,7 @@
 @section('content')
     {{-- <h1>Fill the form to make your profile</h1> --}}
     <div class="leading-loose ">
-        @include('errors.error')
+
         <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl" method="POST" action="{{ route('profile.store') }}">
 
             @csrf
@@ -16,7 +16,7 @@
             <div class="mt-2">
                 <label class=" block text-sm text-gray-600" for="cus_email">Personal information</label>
                 <input class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="address" name="address" type="text"
-                    required="" placeholder="Address" aria-label="Email">
+                     placeholder="Address" aria-label="Email">
             </div>
             <label for="bloodGroup">States</label>
             <div class="relative inline-flex">
@@ -29,7 +29,7 @@
                 <select name="stateId" id="stateId"
                     class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option>Choose a state</option>
-                    @foreach ($state as $item)
+                    @foreach ($allState as $item)
                         <option value={{ $item['stateId'] }}>{{ $item['stateName'] }}</option>
                     @endforeach
                 </select>
@@ -77,5 +77,6 @@
                 <input type="hidden" name="userId" value="{{ $id }}">
             </div>
         </form>
+        @include('errors.error')
     </div>
 @endsection

@@ -62,7 +62,7 @@
                                             name="email" id="email" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" minlength="10" maxlength="10" class="form-control"
+                                        <input type="text" minlength="12" maxlength="15" class="form-control"
                                             placeholder="Your Phone *" value="" name="userPhone" id="userPhone" />
                                     </div>
                                     <input type="submit" class="btnRegister" value="Register" />
@@ -90,7 +90,7 @@
                                             id="email" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" minlength="10" maxlength="10" class="form-control"
+                                        <input type="text" minlength="15" maxlength="15" class="form-control"
                                             placeholder="Your Phone *" value="" name="userPhone" id="userPhone" />
                                     </div>
 
@@ -121,6 +121,7 @@
                             </form>
                         </div>
                     </div>
+                    @include('errors.error')
 
                 </div>
 

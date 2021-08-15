@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Http;
 
 use function GuzzleHttp\json_decode;
 
-class ProfileController extends Controller
+class PatientProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,14 +34,31 @@ class ProfileController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * ************************************************
+     * http://waaasil.com/care/api/updatePatientProfile
      *
+     ***************************************************
+     * recive user id form registion process
+     * 
+     * making http  post request  to update the patient profile
+     * 
+     * sending requset with data and recive response
+     * 
+     * from the sever, decode it and 
+     * 
+     * test status code 
+     * 
+     * return image view
+     * 
+     * 
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
 
     {
+        $id = $request->userId;
+
         $response = Http::post('http://waaasil.com/care/api/updatePatientProfile', [
             'userId' => $request->userId,
             'fullName' => $request->fullName,
@@ -50,15 +67,12 @@ class ProfileController extends Controller
             'hight' => $request->hight,
             'weight' => $request->weight,
             'bloodGroup' => $request->bloodGroup,
-
         ]);
-        // dd($request);
         $data = json_decode($response->getBody());
         if ($data->code == 200) {
-            return view('/comingSoon');
-        } else {
-            return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
+            return view('imageprofile.create', compact('id'));
         }
+        return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
     }
 
     /**
@@ -93,25 +107,6 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $userId)
     {
-
-        $response = Http::post('http://waaasil.com/care/api/patientProfile', [
-            'userId' => $request->userId,
-            'fullName' => $request->fullName,
-            'stateId' => $request->stateId,
-            'address' => $request->address,
-            'hight' => $request->hight,
-            'weight' => $request->weight,
-            'bloodGroup' => $request->bloodGroup,
-            'dateOfBirth' => $request->dateOfBirth,
-        ]);
-
-
-        if ($response->code == 200) {
-            return view('/profile');
-            // session()->flash('');
-        }
-
-        return view('comingSoon');
     }
 
     /**

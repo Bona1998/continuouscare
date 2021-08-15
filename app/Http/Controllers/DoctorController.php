@@ -2,38 +2,68 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegisterForm;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 
 class DoctorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Show the form for creating a new resource.
+     * *******************************************************
+     * http://waaasil.com/care/api/allState
+     * 
+     * **************************************************
+     * making an http request with get method to get allState
+     * 
+     * recive the respons and decode it
      *
-     * @return \Illuminate\Http\Response
+     * save data to array an pass it to view
+     * 
+     * * **********************************************
+     * http://waaasil.com/care/api/newUser
+     * 
+     * **********************************************
+     * 
+     * make post requset to api and send clinte data
+     * 
+     * recive the response from serve and decode it 
+     * 
+     * cheacking for status code if equle 200
+     * 
+     * if then return profile view
+     * 
+     * else return error
+     * 
+     * ***********************************************
+     * http://waaasil.com/care/api/specialization
+     * 
+     * ***********************************************
+     * makign http request to get specialization for doctor profile
+     * 
+     * recive response and decode it and save it 
+     * 
+     * to array and pass it to view
+     * 
+     * ***********************************************
+     * http://waaasil.com/care/api/role
+     * 
+     * ***********************************************
+     *making http requset to get all role for doctor profile
+     *
+     * recive response and decode it  and save it 
+     * 
+     * to array and pass it to view
+     * 
+     * 
+     * all validation comming from RegisterForm.php 
+     * 
+     * 
      */
-    public function create()
-    {
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+     
+    public function store(RegisterForm $request)
     {
         $response = Http::get('http://waaasil.com/care/api/allState');
 
@@ -43,17 +73,20 @@ class DoctorController extends Controller
 
 
         $res = Http::get('http://waaasil.com/care/api/specialization');
-        $space=json_decode($res->getBody(),true);
-        $allSpecialization=$space['data'];
+
+        $space = json_decode($res->getBody(), true);
+
+        $allSpecialization = $space['data'];
 
         $res = Http::get('http://waaasil.com/care/api/role');
 
         $roles = json_decode($res->getBody(), true);
 
         $allRoles = $roles['data'];
-      
+
 
         $code = Str::random(5);
+
         $response = Http::post('http://waaasil.com/care/api/newUser', [
             'fullName' => $request->fullName,
             'email' => $request->email,
@@ -72,10 +105,9 @@ class DoctorController extends Controller
         $id = $data->userId;
 
         if ($data->code == 200) {
-            return view('doctorProfile.create', compact('id','allState','allRoles','allSpecialization'));
-        } else {
-            return view('errors.403');
+            return view('doctorProfile.create', compact('id', 'allState', 'allRoles', 'allSpecialization'));
         }
+        return view('errors.403');
     }
 
     /**
@@ -124,6 +156,6 @@ class DoctorController extends Controller
     }
 
     // Get average runtime of successful runs in seconds
-    
+
 
 }
