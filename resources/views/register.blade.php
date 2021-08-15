@@ -31,8 +31,8 @@
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="First Name *" value=""
-                                            name="fullName" id="fullName" />
+                                        <input type="text" class="form-control" placeholder="Full Name *" value=""
+                                            name="name" id="name" />
                                     </div>
 
                                     <div class="form-group">
@@ -46,11 +46,11 @@
                                     <div class="form-group">
                                         <div class="maxl">
                                             <label class="radio inline">
-                                                <input type="radio" name="genderId" id="1" value=1 checked>
+                                                <input type="radio" name="gender_id" id="1" value=1 checked>
                                                 <span> Male </span>
                                             </label>
                                             <label class="radio inline">
-                                                <input type="radio" name="genderId" id="2" value=2>
+                                                <input type="radio" name="gender_id" id="2" value=2>
                                                 <span>Female </span>
                                             </label>
                                         </div>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" minlength="10" maxlength="10" class="form-control"
-                                            placeholder="Your Phone *" value="" name="userPhone" id="userPhone" />
+                                            placeholder="Your Phone *" value="" name="user_phone" id="user_phone" />
                                     </div>
                                     <input type="submit" class="btnRegister" value="Register" />
                                 </div>
@@ -123,7 +123,10 @@
                     </div>
 
                 </div>
-
+            </div>
+        </div>
+    </div>
+    
             @endsection
             <script>
                window.localStorage.setItem('userId', JSON.stringify(userId));  

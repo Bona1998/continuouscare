@@ -36,7 +36,7 @@ class ImagesProfile extends Controller
     public function store(Request $request)
     {
         $response = Http::post('http://waaasil.com/care/api/saveProfileImages', [
-            'userId' => 8,
+            'userId' => 9,
             'image'=>$request->image, 
         ]);
         dd($response->json());

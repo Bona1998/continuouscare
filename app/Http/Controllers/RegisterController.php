@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ViewErrorBag;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Illuminate\Support\Str;
+use App\Http\Controllers\localStorage;
 $st;
 class RegisterController extends Controller
 {
@@ -38,31 +39,43 @@ class RegisterController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::get('http://waaasil.com/care/api/allState');
+        // $response = Http::get('http://waaasil.com/care/api/allState');
 
-        $state = json_decode($response->getBody(), true);
+        // $state = json_decode($response->getBody(), true);
 
-        $allState = $state['data'];
+        // $allState = $state['data'];
 
         $code = Str::random(5);
-        $response = Http::post('http://waaasil.com/care/api/newUser', [
-            'fullName' => $request->fullName,
+        $response = Http::post('http://waaasil.com/care/api/users', [
+            'name' => $request->name,
             'email' => $request->email,
-            'userPhone' => $request->userPhone,
+            'user_phone' => $request->user_phone,
             'otp' => $code,
-            'userNotification' => 'hi there',
+            'user_notification' => 'hi there',
             'password' => $request->password,
-            'genderId' => (int)$request->genderId,
-            'userLevel' => 2,
+            'gender_id' => (int)$request->gender_id,
+            'user_type' => 2,
 
         ]);
        
 
         $data = json_decode($response->getBody());
-        $id = $data->userId;
-
+        // dd($data);
+         $id = $data->data->userId;
+        //  dd($id);
+        // dd($data->data->token);
+        // dd($id);
+        $token=$data->data->token;
+        // localStorage.setIteam('id',{$id});
+        // localStorage.setItem('id', 'id');
+        
+        "<script>
+        localStorage.setItem('id', JSON.stringify(id));
+        </script>";
+        
+       
         if ($data->code == 200) {
-            return view('profile.create', compact('id'))->with('state', $allState);
+            return view('profile.create', compact('id','token'));
         } else {
             return view('errors.403');
         }

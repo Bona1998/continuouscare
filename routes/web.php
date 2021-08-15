@@ -34,6 +34,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/comingSoon', function () {
     return view('comingSoon');
 });
+Route::get('/new', function () {
+    return view('new');
+});
 Route::get('/', 'WelcomeController@index')->name('/');
 Route::get('/otp', 'otpController@index')->name('otp');
 Route::post('/otp', 'otpController@store')->name('otp.store');
@@ -76,7 +79,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::get('/product', 'ProductController@index')->name('product');
-
+Route::get('/about', 'AboutController@index')->name('about');
 Route::resource('brifDescriptions', 'BrifDescriptionController');
 
 Route::resource('services', 'ServicesController');
@@ -84,3 +87,9 @@ Route::resource('services', 'ServicesController');
 Route::resource('reviwes', 'ReviwesController');
 
 Route::resource('goals', 'GoalsController');
+
+Route::resource('aboutuses', 'AboutUsController');
+
+Route::resource('plansPicings', 'Plans_PicingController');
+
+Route::resource('patentServices', 'Patent_ServicesController');

@@ -54,8 +54,8 @@ class ProfileController extends Controller
            
 
         ]);
-        $response = Http::post('http://waaasil.com/care/api/saveProfileImages', [
-            'userId' => $request->userId,]);
+        // $response = Http::post('http://waaasil.com/care/api/saveProfileImages', [
+        //     'userId' => $request->userId,]);
         // dd($request);
         $data = json_decode($response->getBody());
         if ($data->code == 200) {
@@ -98,7 +98,7 @@ class ProfileController extends Controller
     public function update(Request $request, $userId)
     {
 
-        $response = Http::post('http://waaasil.com/care/api/patientProfile', [
+        $response = Http::post('http://waaasil.com/care/api/patients/{userId}', [
             'userId' => $request->userId,
             'fullName' => $request->fullName,
             'stateId' => $request->stateId,
