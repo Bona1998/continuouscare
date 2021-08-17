@@ -35,44 +35,45 @@ class DoctorController extends Controller
      */
     public function store(Request $request)
     {
-        $response = Http::get('http://waaasil.com/care/api/allState');
+        // $response = Http::get('http://waaasil.com/care/api/allState');
 
-        $state = json_decode($response->getBody(), true);
+        // $state = json_decode($response->getBody(), true);
 
-        $allState = $state['data'];
+        // $allState = $state['data'];
 
 
-        $res = Http::get('http://waaasil.com/care/api/specialization');
-        $space=json_decode($res->getBody(),true);
-        $allSpecialization=$space['data'];
+        // $res = Http::get('http://waaasil.com/care/api/specialization');
+        // $space=json_decode($res->getBody(),true);
+        // $allSpecialization=$space['data'];
 
-        $res = Http::get('http://waaasil.com/care/api/role');
+        // $res = Http::get('http://waaasil.com/care/api/role');
 
-        $roles = json_decode($res->getBody(), true);
+        // $roles = json_decode($res->getBody(), true);
 
-        $allRoles = $roles['data'];
+        // $allRoles = $roles['data'];
       
 
         $code = Str::random(5);
-        $response = Http::post('http://waaasil.com/care/api/newUser', [
-            'fullName' => $request->fullName,
+        $response = Http::post('http://waaasil.com/care/api/users', [
+            'name' => $request->name,
             'email' => $request->email,
-            'userPhone' => $request->userPhone,
+            'user_phone' => $request->user_phone,
             'otp' => $code,
-            'userNotification' => 'welcome',
+            'user_notification' => 'hi i am doctor',
             'password' => $request->password,
-            'genderId' => (int)$request->genderId,
-            'userLevel' => 1,
+            'gender_id' => (int)$request->gender_id,
+            'user_type' => 1,
 
         ]);
 
 
         $data = json_decode($response->getBody());
-
-        $id = $data->userId;
-
+        // $id = $data->userId;
+         $id = $data->data->userId;
+         $token=$data->data->token;
         if ($data->code == 200) {
-            return view('doctorProfile.create', compact('id','allState','allRoles','allSpecialization'));
+            dd($data);
+            return view('doctorProfile.create', compact('id','token'));
         } else {
             return view('errors.403');
         }

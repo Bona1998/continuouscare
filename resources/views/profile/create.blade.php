@@ -29,9 +29,9 @@
                 <select name="stateId" id="stateId"
                     class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option>Choose a state</option>
-                    @foreach ($state as $item)
+                    {{-- @foreach ($state as $item)
                         <option value={{ $item['stateId'] }}>{{ $item['stateName'] }}</option>
-                    @endforeach
+                    @endforeach --}}
                 </select>
             </div>
             <div class="inline-block mt-2 w-1/2 pr-1">

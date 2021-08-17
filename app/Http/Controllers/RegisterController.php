@@ -51,7 +51,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'user_phone' => $request->user_phone,
             'otp' => $code,
-            'user_notification' => 'hi there',
+            'user_notification' => 'hi i am patient',
             'password' => $request->password,
             'gender_id' => (int)$request->gender_id,
             'user_type' => 2,
@@ -75,6 +75,7 @@ class RegisterController extends Controller
         
        
         if ($data->code == 200) {
+            // dd($data);
             return view('profile.create', compact('id','token'));
         } else {
             return view('errors.403');

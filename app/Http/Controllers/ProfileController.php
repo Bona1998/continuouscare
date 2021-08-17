@@ -98,15 +98,16 @@ class ProfileController extends Controller
     public function update(Request $request, $userId)
     {
 
-        $response = Http::post('http://waaasil.com/care/api/patients/{userId}', [
+        $response = Http::post('http://waaasil.com/care/api/patients/3', [
             'userId' => $request->userId,
-            'fullName' => $request->fullName,
-            'stateId' => $request->stateId,
+            'name' => $request->name,
+            'state_id' => $request->state_id,
             'address' => $request->address,
-            'hight' => $request->hight,
+            'height' => $request->height,
             'weight' => $request->weight,
-            'bloodGroup' => $request->bloodGroup,
-            'dateOfBirth' => $request->dateOfBirth,
+            'date ' => $request->date ,
+            'blood_group' => $request->blood_group,
+            'date_of_birth' => $request->date_of_birth,
         ]);
 
         $data= json_decode($response->getBody());

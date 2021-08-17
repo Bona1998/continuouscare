@@ -41,7 +41,7 @@ class DoctorLoginController extends Controller
         $response = Http::post('http://waaasil.com/care/api/userLogin', [
             'userName' => $request->userName,
             'password' => $request->password,
-            'userLevel' => 1,
+            'user_type' => 1,
         ]);
 
         $data = json_decode($response->getBody());

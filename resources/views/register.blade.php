@@ -72,7 +72,7 @@
                     </form>
 
 
-                    {{-- ********************************************************************************************* --}}
+                    {{-- *************************************************Doctor******************************************** --}}
                     <?php $currentPage = 'profile'; ?>
                     <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h3 class="register-heading">Apply as a Doctor</h3>
@@ -82,7 +82,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="First Name *" value=""
-                                            name="fullName" id="fullName" />
+                                            name="name" id="name" />
                                     </div>
 
                                     <div class="form-group">
@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="form-group">
                                         <input type="text" minlength="10" maxlength="10" class="form-control"
-                                            placeholder="Your Phone *" value="" name="userPhone" id="userPhone" />
+                                            placeholder="Your Phone *" value="" name="user_phone" id="user_phone" />
                                     </div>
 
 
@@ -105,11 +105,11 @@
                                 <div class="form-group">
                                     <div class="maxl">
                                         <label class="radio inline">
-                                            <input type="radio" name="genderId" id="1" value=1 checked>
+                                            <input type="radio" name="gender_id" id="1" value=1 checked>
                                             <span> Male </span>
                                         </label>
                                         <label class="radio inline">
-                                            <input type="radio" name="genderId" id="2" value=2>
+                                            <input type="radio" name="gender_id" id="2" value=2>
                                             <span>Female </span>
                                         </label>
                                     </div>
