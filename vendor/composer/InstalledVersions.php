@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'e80a297285d4e6d9f45a2775dd6db33942a11bbd',
+    'reference' => '1e8f6d4e4a6b7271c59a7769980ccde79894c60e',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -439,6 +439,15 @@ private static $installed = array (
       ),
       'reference' => 'c784c38346ef3f9f6be368e4a1dbd9ef3c038c43',
     ),
+    'intervention/image' => 
+    array (
+      'pretty_version' => '2.5.1',
+      'version' => '2.5.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'abbf18d5ab8367f96b3205ca3c89fb2fa598c69e',
+    ),
     'kodova/hamcrest-php' => 
     array (
       'replaced' => 
@@ -471,7 +480,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'e80a297285d4e6d9f45a2775dd6db33942a11bbd',
+      'reference' => '1e8f6d4e4a6b7271c59a7769980ccde79894c60e',
     ),
     'laravel/tinker' => 
     array (
@@ -772,8 +781,8 @@ private static $installed = array (
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache' => 

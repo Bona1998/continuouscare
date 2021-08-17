@@ -36,14 +36,14 @@ class PatientLoginController extends Controller
     public function store(Request $request)
     {
         // dd($request);
-        $response = Http::post('http://waaasil.com/care/api/userLogin', [
+        $response = Http::accept('application/json')->post('http://waaasil.com/care/api/userLogin', [
             'userName' => $request->userName,
             'password' => $request->password,
-            'userLevel' => 2,
+            'user_type' => 2,
         ]);
 
         $data = json_decode($response->getBody());
-
+        // dd($data);
 
 
         if ($data->code == 200) {

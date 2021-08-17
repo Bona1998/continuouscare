@@ -24,7 +24,7 @@ class PatientProfileForm extends FormRequest
     public function rules()
     {
         return [
-            'fullName' => 'required|string|255',
+            'fullName' => 'required|string|max:255',
             'stateId' => 'required',
             'address' => 'sometimes',
             'hight' => 'required',

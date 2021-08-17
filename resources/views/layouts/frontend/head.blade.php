@@ -137,13 +137,13 @@ body {
   width: 300px;
   padding-bottom: 1.5em;
   height: 100%;
-  background-color: #1e2321;
+  background-color: #2e6859;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   border-radius: 20px;
-  box-shadow: 0 19px 38px rgba(30, 35, 33, 1), 0 15px 12px rgba(30, 35, 33, 0.2);
+  box-shadow: 0 19px 38px rgba(93, 149, 145), 0 15px 12px rgba(30, 35, 33, 0.2);
   flex-wrap: wrap;
   color: #f4f4f4;
 }
@@ -204,8 +204,8 @@ label {
 }
 
 .button1 {
-  background-color: #50bfe6;
-  box-shadow: 0 0 10px 0 #50bfe6 inset, 0 0 20px 2px #50bfe6;
+  background-color: #20a497;
+  box-shadow: 0 0 10px 0 #84ddbc inset, 0 0 20px 2px #bde6d8;;
 }
 
 .button2 {
@@ -238,10 +238,10 @@ label {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #1e2321;
+  background-color: #91d5d0;
   -webkit-transition: 0.4s;
 
-  box-shadow: 2px 6px 25px #1e2321;
+  box-shadow: 2px 6px 25px rgba(93, 149, 145),;
   transform: translate(0px, 0px);
   transition: 0.6s ease transform, 0.6s box-shadow;
 }
@@ -356,5 +356,9 @@ input[type=number]::-webkit-outer-spin-button {
     border: 1px solid rgb(46, 196, 163);
     width: 140px
 }
+
+
+
 </style>
+
   </head>

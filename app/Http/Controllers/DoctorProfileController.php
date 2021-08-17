@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -63,7 +64,13 @@ class DoctorProfileController extends Controller
         $data = json_decode($response->getBody());
 
         if ($data->code == 200) {
-            return view('imageprofile.create', compact('id'));
+            return view('comingSoon');
+            // session()->flash('');
+        }else
+        {
+            
+        return redirect('errors.404');
+
         }
         return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
     }
@@ -87,7 +94,7 @@ class DoctorProfileController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('profile.edit',compact(34));
     }
 
     /**
@@ -99,7 +106,7 @@ class DoctorProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      
     }
 
     /**

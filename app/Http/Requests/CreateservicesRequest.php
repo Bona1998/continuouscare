@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Models\services;
+use App\Models\Services;
 
-class CreateservicesRequest extends FormRequest
+class CreateServicesRequest extends FormRequest
 {
 
     /**
@@ -25,6 +25,6 @@ class CreateservicesRequest extends FormRequest
      */
     public function rules()
     {
-        return services::$rules;
+        return Services::$rules;
     }
 }

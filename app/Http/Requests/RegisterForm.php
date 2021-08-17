@@ -31,10 +31,10 @@ class RegisterForm extends FormRequest
     public function rules()
     {
         return [
-            'fullName' => 'required',
+            'name' => 'required',
             'email' => 'required|email',
-            'userPhone' => 'required',
-            'password' => 'required|',
+            'user_phone' => 'required',
+            'password' => 'required',
         ];
     }
 }

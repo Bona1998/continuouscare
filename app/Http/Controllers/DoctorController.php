@@ -65,47 +65,26 @@ class DoctorController extends Controller
      
     public function store(RegisterForm $request)
     {
-        $response = Http::get('http://waaasil.com/care/api/allState');
-
-        $state = json_decode($response->getBody(), true);
-
-        $allState = $state['data'];
-
-
-        $res = Http::get('http://waaasil.com/care/api/specialization');
-
-        $space = json_decode($res->getBody(), true);
-
-        $allSpecialization = $space['data'];
-
-        $res = Http::get('http://waaasil.com/care/api/role');
-
-        $roles = json_decode($res->getBody(), true);
-
-        $allRoles = $roles['data'];
-
-
+    
         $code = Str::random(5);
 
-        $response = Http::post('http://waaasil.com/care/api/newUser', [
-            'fullName' => $request->fullName,
+        $response = Http::post('http://waaasil.com/care/api/users', [
+            'name' => $request->name,
             'email' => $request->email,
-            'userPhone' => $request->userPhone,
+            'user_phone' => $request->user_phone,
             'otp' => $code,
-            'userNotification' => 'welcome',
+            'user_notification' => 'welcome',
             'password' => $request->password,
             'genderId' => (int)$request->genderId,
-            'userLevel' => 1,
-
+            'user_type' => 1,
         ]);
-
-
+    
         $data = json_decode($response->getBody());
-
+        dd($data);
         $id = $data->userId;
 
         if ($data->code == 200) {
-            return view('doctorProfile.create', compact('id', 'allState', 'allRoles', 'allSpecialization'));
+            return view('doctorProfile.create', compact('id'));
         }
         return view('errors.403');
     }

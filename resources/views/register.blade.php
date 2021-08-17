@@ -6,7 +6,7 @@
                 <img src="https://image.ibb.co/n7oTvU/logo_white.png" alt="" />
                 <h3>Welcome</h3>
                 <p>You are !</p>
-                <a href="{{ asset('/login') }}"><input type="submit" name="" value="Login" /><br /></a>
+                <a href="{{ asset('/loginCustom') }}"><input type="submit" name="" value="Login" /><br /></a>
             </div>
             <div class="col-md-9 register-right">
                 <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
@@ -26,13 +26,13 @@
                     <?php $currentPage = 'home'; ?>
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <h3 class="register-heading">Apply as a Patient</h3>
-                        <form action="{{ asset('/register') }}" method="POST">
+                        <form action="{{ asset('/registerCustom') }}" method="POST">
                             <div class="row register-form">
                                 @csrf
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="First Name *" value=""
-                                            name="fullName" id="fullName" />
+                                        <input type="text" class="form-control" placeholder="Full Name *" value=""
+                                            name="name" id="name" />
                                     </div>
 
                                     <div class="form-group">
@@ -46,11 +46,11 @@
                                     <div class="form-group">
                                         <div class="maxl">
                                             <label class="radio inline">
-                                                <input type="radio" name="genderId" id="1" value=1 checked>
+                                                <input type="radio" name="gender_id" id="1" value=1 checked>
                                                 <span> Male </span>
                                             </label>
                                             <label class="radio inline">
-                                                <input type="radio" name="genderId" id="2" value=2>
+                                                <input type="radio" name="gender_id" id="2" value=2>
                                                 <span>Female </span>
                                             </label>
                                         </div>
@@ -62,8 +62,8 @@
                                             name="email" id="email" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" minlength="12" maxlength="15" class="form-control"
-                                            placeholder="Your Phone *" value="" name="userPhone" id="userPhone" />
+                                        <input type="text" minlength="10" maxlength="10" class="form-control"
+                                            placeholder="Your Phone *" value="" name="user_phone" id="user_phone" />
                                     </div>
                                     <input type="submit" class="btnRegister" value="Register" />
                                 </div>
@@ -82,7 +82,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="First Name *" value=""
-                                            name="fullName" id="fullName" />
+                                            name="name" id="name" />
                                     </div>
 
                                     <div class="form-group">
@@ -90,8 +90,8 @@
                                             id="email" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" minlength="15" maxlength="15" class="form-control"
-                                            placeholder="Your Phone *" value="" name="userPhone" id="userPhone" />
+                                        <input type="text" minlength="10" maxlength="10" class="form-control"
+                                            placeholder="Your Phone *" value="" name="user_phone" id="user_phone" />
                                     </div>
 
 
@@ -124,5 +124,11 @@
                     @include('errors.error')
 
                 </div>
-
+            </div>
+        </div>
+    </div>
+    
             @endsection
+            <script>
+               window.localStorage.setItem('userId', JSON.stringify(userId));  
+            </script>

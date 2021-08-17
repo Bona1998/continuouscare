@@ -3,7 +3,8 @@
         <thead>
             <tr>
                 <th>Name</th>
-        <th>Descption</th>
+        <th>Description</th>
+        <th>Image Url</th>
                 <th colspan="3">Action</th>
             </tr>
         </thead>
@@ -11,7 +12,8 @@
         @foreach($services as $services)
             <tr>
                 <td>{{ $services->name }}</td>
-            <td>{{ $services->descption }}</td>
+            <td>{{ $services->description }}</td>
+            <td><img height="50" src="{{ $services->image_url }}}" alt="image"></td>
                 <td width="120">
                     {!! Form::open(['route' => ['services.destroy', $services->id], 'method' => 'delete']) !!}
                     <div class='btn-group'>

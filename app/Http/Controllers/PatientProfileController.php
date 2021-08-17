@@ -67,7 +67,13 @@ class PatientProfileController extends Controller
             'hight' => $request->hight,
             'weight' => $request->weight,
             'bloodGroup' => $request->bloodGroup,
+            'dateOfBirth' => $request->dateOfBirth,
+           
+
         ]);
+        // $response = Http::post('http://waaasil.com/care/api/saveProfileImages', [
+        //     'userId' => $request->userId,]);
+        // dd($request);
         $data = json_decode($response->getBody());
         if ($data->code == 200) {
             return view('imageprofile.create', compact('id'));
@@ -107,6 +113,30 @@ class PatientProfileController extends Controller
      */
     public function update(Request $request, $userId)
     {
+
+        $response = Http::post('http://waaasil.com/care/api/patients/{userId}', [
+            'userId' => $request->userId,
+            'fullName' => $request->fullName,
+            'stateId' => $request->stateId,
+            'address' => $request->address,
+            'hight' => $request->hight,
+            'weight' => $request->weight,
+            'bloodGroup' => $request->bloodGroup,
+            'dateOfBirth' => $request->dateOfBirth,
+        ]);
+
+        $data= json_decode($response->getBody());
+
+        if ($$data->code == 200) {
+            return view('comingSoon');
+            // session()->flash('');
+        }else
+        {
+            
+        return redirect('errors.404');
+
+        }
+
     }
 
     /**

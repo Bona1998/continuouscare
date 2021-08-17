@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ViewErrorBag;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Illuminate\Support\Str;
-use Symfony\Contracts\Service\Attribute\Required;
+use App\Http\Controllers\localStorage;
 
+$st;
 class RegisterController extends Controller
 {
     /**
@@ -66,36 +67,43 @@ class RegisterController extends Controller
      */
     public function store(RegisterForm $form)
     {
+        // $response = Http::get('http://waaasil.com/care/api/allState');
 
-        $response = Http::get('http://waaasil.com/care/api/allState');
+        // $state = json_decode($response->getBody(), true);
 
-        $state = json_decode($response->getBody(), true);
+        // $allState = $state['data'];
 
-        $allState = $state['data'];
-
-        $Otpcode = Str::random(5);
-
-        $response = Http::post('http://waaasil.com/care/api/newUser', [
-            'fullName' => $form->fullName,
+        $code = Str::random(5);
+        $response = Http::post('http://waaasil.com/care/api/users', [
+            'name' => $form->name,
             'email' => $form->email,
-            'userPhone' => $form->userPhone,
-            'otp' => $Otpcode,
-            'userNotification' => 'hi there',
+            'user_phone' => $form->user_phone,
+            'otp' => $code,
+            'user_notification' => 'hi there',
             'password' => $form->password,
-            'genderId' => (int)$form->genderId,
-            'userLevel' => 2,
+            'gender_id' => (int)$form->gender_id,
+            'user_type' => 2,
         ]);
-
-
+      
         $data = json_decode($response->getBody());
+        // $id = $data->data->userId;
+        //  dd($id);
+        // dd($data->data->token);
+        // dd($id);
+        $token = $data->data->token;
+        // localStorage.setIteam('id',{$id});
+        // localStorage.setItem('id', 'id');
 
-        $id = $data->userId;
+        "<script>
+        localStorage.setItem('id', JSON.stringify(id));
+        </script>";
+
 
         if ($data->code == 200) {
-            return view('profile.create', compact('id', 'allState'));
+            return view('profile.create', compact('id', 'token'));
+        } else {
+            return view('errors.403');
         }
-
-        return view('errors.403');
     }
 
 
