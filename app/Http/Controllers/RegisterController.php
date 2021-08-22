@@ -67,11 +67,6 @@ class RegisterController extends Controller
      */
     public function store(RegisterForm $form)
     {
-        // $response = Http::get('http://waaasil.com/care/api/allState');
-
-        // $state = json_decode($response->getBody(), true);
-
-        // $allState = $state['data'];
 
         $code = Str::random(5);
         $response = Http::post('http://waaasil.com/care/api/users', [
@@ -79,28 +74,21 @@ class RegisterController extends Controller
             'email' => $form->email,
             'user_phone' => $form->user_phone,
             'otp' => $code,
-            'user_notification' => 'hi there',
+            'user_notification' => 'hi i am patient',
             'password' => $form->password,
             'gender_id' => (int)$form->gender_id,
             'user_type' => 2,
         ]);
-      
-        $data = json_decode($response->getBody());
-        // $id = $data->data->userId;
-        //  dd($id);
-        // dd($data->data->token);
-        // dd($id);
-        $token = $data->data->token;
-        // localStorage.setIteam('id',{$id});
-        // localStorage.setItem('id', 'id');
 
-        "<script>
-        localStorage.setItem('id', JSON.stringify(id));
-        </script>";
-
-
-        if ($data->code == 200) {
-            return view('profile.create', compact('id', 'token'));
+        $res = json_decode($response->getBody());
+        $saveData=$res;
+        // dd($saveData);
+        $token= $saveData->data->token;
+        session(['token' => $token]);
+        $token = session('token');
+        $id=$saveData->data->userId;
+        if ($saveData->code == 200) {
+            return view('profile.index', compact('id', 'token'));
         } else {
             return view('errors.403');
         }

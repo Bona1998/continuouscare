@@ -104,11 +104,11 @@
                                 <div class="form-group">
                                     <div class="maxl">
                                         <label class="radio inline">
-                                            <input type="radio" name="genderId" id="1" value=1 checked>
+                                            <input type="radio" name="gender_id" id="1" value=1 checked>
                                             <span> Male </span>
                                         </label>
                                         <label class="radio inline">
-                                            <input type="radio" name="genderId" id="2" value=2>
+                                            <input type="radio" name="gender_id" id="2" value=2>
                                             <span>Female </span>
                                         </label>
                                     </div>

@@ -72,7 +72,7 @@
                     </form>
 
 
-                    {{-- ********************************************************************************************* --}}
+                    {{-- *************************************************Doctor******************************************** --}}
                     <?php $currentPage = 'profile'; ?>
                     <div class="tab-pane fade show" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <h3 class="register-heading">Apply as a Doctor</h3>
@@ -105,11 +105,11 @@
                                 <div class="form-group">
                                     <div class="maxl">
                                         <label class="radio inline">
-                                            <input type="radio" name="genderId" id="1" value=1 checked>
+                                            <input type="radio" name="gender_id" id="1" value=1 checked>
                                             <span> Male </span>
                                         </label>
                                         <label class="radio inline">
-                                            <input type="radio" name="genderId" id="2" value=2>
+                                            <input type="radio" name="gender_id" id="2" value=2>
                                             <span>Female </span>
                                         </label>
                                     </div>

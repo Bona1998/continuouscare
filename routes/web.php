@@ -66,7 +66,7 @@ Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // RouteGroup()
 
 Route::get('/profile', 'PatientProfileController@create')->name('profile.create');
-
+Route::post('/profile/{userId}', 'PatientProfileController@index')->name('profile.index');
 Route::post('/profile', 'PatientProfileController@store')->name('profile.store');
 
 Route::get('/doctorProfile', 'DoctorProfileController@create')->name('doctorProfile.create');

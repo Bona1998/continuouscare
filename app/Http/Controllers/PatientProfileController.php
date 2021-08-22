@@ -15,8 +15,14 @@ class PatientProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $response = Http::get('http://waaasil.com/care/api/patients/{userId}', [
+            'userId' => $request->userId,
+        ]);
+        $data = json_decode($response->body());
+
+        return view('Profile.index', compact('data'));
     }
 
     /**
@@ -68,12 +74,9 @@ class PatientProfileController extends Controller
             'weight' => $request->weight,
             'bloodGroup' => $request->bloodGroup,
             'dateOfBirth' => $request->dateOfBirth,
-           
+
 
         ]);
-        // $response = Http::post('http://waaasil.com/care/api/saveProfileImages', [
-        //     'userId' => $request->userId,]);
-        // dd($request);
         $data = json_decode($response->getBody());
         if ($data->code == 200) {
             return view('imageprofile.create', compact('id'));
@@ -114,29 +117,27 @@ class PatientProfileController extends Controller
     public function update(Request $request, $userId)
     {
 
-        $response = Http::post('http://waaasil.com/care/api/patients/{userId}', [
+        $response = Http::post('http://waaasil.com/care/api/patients/3', [
             'userId' => $request->userId,
-            'fullName' => $request->fullName,
-            'stateId' => $request->stateId,
+            'name' => $request->name,
+            'state_id' => $request->state_id,
             'address' => $request->address,
-            'hight' => $request->hight,
+            'height' => $request->height,
             'weight' => $request->weight,
-            'bloodGroup' => $request->bloodGroup,
-            'dateOfBirth' => $request->dateOfBirth,
+            'date ' => $request->date,
+            'blood_group' => $request->blood_group,
+            'date_of_birth' => $request->date_of_birth,
         ]);
 
-        $data= json_decode($response->getBody());
+        $data = json_decode($response->getBody());
 
         if ($$data->code == 200) {
             return view('comingSoon');
             // session()->flash('');
-        }else
-        {
-            
-        return redirect('errors.404');
+        } else {
 
+            return redirect('errors.404');
         }
-
     }
 
     /**

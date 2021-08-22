@@ -61,30 +61,34 @@ class DoctorController extends Controller
      * 
      * 
      */
-
+  
      
     public function store(RegisterForm $request)
     {
     
         $code = Str::random(5);
-
         $response = Http::post('http://waaasil.com/care/api/users', [
             'name' => $request->name,
             'email' => $request->email,
             'user_phone' => $request->user_phone,
             'otp' => $code,
-            'user_notification' => 'welcome',
+            'user_notification' => 'hi i am doctor',
             'password' => $request->password,
-            'genderId' => (int)$request->genderId,
+            'gender_id' => (int)$request->gender_id,
             'user_type' => 1,
+
         ]);
     
         $data = json_decode($response->getBody());
         dd($data);
-        $id = $data->userId;
-
+        // // $id = $data->userId;
+        //  $id = $data->data->userId;
+        //  $token=$data->data->token;
         if ($data->code == 200) {
-            return view('doctorProfile.create', compact('id'));
+            dd($data);
+            return view('doctorProfile.create', compact('id','token'));
+        } else {
+            return view('errors.403');
         }
         return view('errors.403');
     }
