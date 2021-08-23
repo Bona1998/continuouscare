@@ -14,6 +14,8 @@ use Symfony\Component\VarDumper\Cloner\Data;
 use Illuminate\Support\Str;
 use App\Http\Controllers\localStorage;
 
+use function GuzzleHttp\json_decode;
+
 $st;
 class RegisterController extends Controller
 {
@@ -80,17 +82,27 @@ class RegisterController extends Controller
             'user_type' => 2,
         ]);
 
-        $res = json_decode($response->getBody());
-        $saveData=$res;
+        $Data = json_decode($response->getBody());
+        $saveData = $Data;
         // dd($saveData);
-        $token= $saveData->data->token;
+        $token = $saveData->data->token;
         session(['token' => $token]);
         $token = session('token');
-        $id=$saveData->data->userId;
-        if ($saveData->code == 200) {
-            return view('profile.index', compact('id', 'token'));
-        } else {
-            return view('errors.403');
+        $id = $saveData->data->userId;
+   
+        try {
+            if ($saveData->code == 200) {
+                $proData = Http::get('http://waaasil.com/care/api/patients/{userId}', [
+                    'userId'=> $id,
+                ]);
+                $profileData = json_decode($proData->getBody());
+                dd($profileData);
+                return view('profile.index', compact('id', 'token', 'profileData'));
+            } else {
+                return view('errors.403');
+            }
+        } catch (Exception $e) {
+            throw($e);
         }
     }
 

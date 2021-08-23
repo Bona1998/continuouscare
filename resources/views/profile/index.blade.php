@@ -3,12 +3,10 @@
 @section('content')
     <div>
         <ul>
-            @foreach ($data as $item)
-                Name:<p>{{ $item->name }}</p>
-                Email:<p>{{ $item->email }}</p>
-                phone:<p>{{ $item->user_phone }}</p>
-                Email:<p>{{ $item->email }}</p>
-            @endforeach
+                Name:<p>{{ $profileData->data->patientProfile->name }}</p>
+                Email:<p>{{$profileData->data->patientProfile->email }}</p>
+                phone:<p>{{$profileData->data->patientProfile->user_phone }}</p>
+                user_notification:<p>{{$profileData->data->patientProfile->user_notification }}</p>
         </ul>
     </div>
 @endsection
