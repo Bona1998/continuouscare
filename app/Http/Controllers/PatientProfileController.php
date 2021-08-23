@@ -92,7 +92,17 @@ class PatientProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $request =Http::get('http://waaasil.com/care/api/patients/3');
+            // $dat = $request['data']['patientProfile'];
+            $dat = json_decode($request->getBody());
+            $data = $dat->data->patientProfile;
+            if (empty($data)) {
+                Flash::error('Patient not found');
+    
+                // return redirect(route('profile.index'));
+            }
+    
+            return view('profile.show')->with('data', $data);
     }
 
     /**
@@ -148,6 +158,19 @@ class PatientProfileController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $request =Http::get('http://waaasil.com/care/api/patients/84');
+        $dat = json_decode($request->getBody());
+        $data = $dat->data->patientProfile;
+        if (empty($data )) {
+            Flash::error('Profile not found');
+
+            // return redirect(route('services.index'));
+        }
+
+        $data->delete(84);
+
+        Flash::success('Services deleted successfully.');
+
+        return redirect(route('services.index'));
     }
 }

@@ -21,10 +21,16 @@ use Illuminate\Support\Facades\Route;
     
 //     return view('welcome');
 // });
-// Route::get('/role', function () {
-//     $response = Http::get('http://waaasil.com/care/api/role');
-//     dd($response['data'][0]);
-// });
+Route::get('/role', function () {
+    $id =3;
+    $request =Http::get('http://waaasil.com/care/api/patients/3');
+    // $dat = $request['data']['patientProfile'];
+    $dat = json_decode($request->getBody());
+    dd($dat);
+  $response = Http::get('http://waaasil.com/care/api/patients/$id');
+    $data= json_decode($response->getBody());
+    dd($data['data']);
+});
 // Route::get('/space', function () {
 //     $response = Http::get('http://waaasil.com/care/api/specialization');
 //     dd($response->json());
@@ -50,6 +56,14 @@ Route::get('/registerCustom', 'RegisterController@create')->name('register.creat
 Route::post('/registerCustom', 'RegisterController@store')->name('register.store');
 Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
 
+// Profile
+
+Route::get('/profile', 'PatientProfileController@create')->name('profile.create');
+Route::post('/profile/{userId}', 'PatientProfileController@index')->name('profile.index');
+Route::post('/profile', 'PatientProfileController@store')->name('profile.store');
+Route::get('/showProfile{userId}', 'PatientProfileController@show')->name('profile.show');
+Route::get('/destroyProfile{userId}', 'PatientProfileController@show')->name('profile.destroy');
+
 
 Route::get('/otp', 'otpController@index')->name('otp');
 Route::post('/otp', 'otpController@store')->name('otp.store');
@@ -65,9 +79,6 @@ Route::get('/pricing', 'PricingController@index')->name('pricing');
 Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // RouteGroup()
 
-Route::get('/profile', 'PatientProfileController@create')->name('profile.create');
-Route::post('/profile/{userId}', 'PatientProfileController@index')->name('profile.index');
-Route::post('/profile', 'PatientProfileController@store')->name('profile.store');
 
 Route::get('/doctorProfile', 'DoctorProfileController@create')->name('doctorProfile.create');
 
