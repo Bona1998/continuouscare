@@ -24,6 +24,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
+        
     }
 
     /**
@@ -82,13 +83,23 @@ class RegisterController extends Controller
 
         $res = json_decode($response->getBody());
         $saveData=$res;
-        // dd($saveData);
+         //dd($saveData);
         $token= $saveData->data->token;
         session(['token' => $token]);
         $token = session('token');
         $id=$saveData->data->userId;
+        $i=3;
+        // dd( $id);
         if ($saveData->code == 200) {
-            return view('profile.index', compact('id', 'token'));
+            $request =Http::get('http://waaasil.com/care/api/patients/3');
+            // $dat = $request['data']['patientProfile'];
+            $dat = json_decode($request->getBody());
+            $data = $dat->data->patientProfile;
+            //  dd($data);
+            //  $data = $dat['data']['patientProfile'];
+            //  dd($data);
+            //  dd(dat['data']['patientProfile']);
+            return view('profile.index', compact('id', 'token','data'));
         } else {
             return view('errors.403');
         }
