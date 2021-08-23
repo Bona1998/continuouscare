@@ -101,7 +101,7 @@ class RegisterController extends Controller
             //  $data = $dat['data']['patientProfile'];
             //  dd($data);
             //  dd(dat['data']['patientProfile']);
-            return view('profile.index', compact('id', 'token','data'));
+            return view('profile.table', compact('id', 'token','data'));
         } else {
             return view('errors.403');
         }
