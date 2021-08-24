@@ -93,7 +93,7 @@ class RegisterController extends Controller
         $i=3;
         // dd( $id);
         if ($saveData->code == 200) {
-            $request =Http::get('http://waaasil.com/care/api/patients/3');
+            $request =Http::get('http://waaasil.com/care/api/patients/116');
             // $dat = $request['data']['patientProfile'];
             $dat = json_decode($request->getBody());
             $data = $dat->data->patientProfile;
@@ -101,7 +101,7 @@ class RegisterController extends Controller
             //  $data = $dat['data']['patientProfile'];
             //  dd($data);
             //  dd(dat['data']['patientProfile']);
-            return view('profile.table', compact('id', 'token','data'));
+            return view('profile.show', compact('id', 'token','data'));
         } else {
             return view('errors.403');
         }
