@@ -68,9 +68,10 @@ Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
 
 Route::get('/profile', 'PatientProfileController@create')->name('profile.create');
 // Route::post('/profile/{userId}', 'PatientProfileController@index')->name('profile.index');
+Route::get('/showProfile/{userId}', 'PatientProfileController@show')->name('profile.show');
 Route::get('/profile/{userId}', 'PatientProfileController@edit')->name('profile.edit');
 Route::post('/updateProfile/{userId}', 'PatientProfileController@update')->name('profile.update');
-Route::get('/showProfile/{userId}', 'PatientProfileController@show')->name('profile.show');
+
 Route::get('/destroyProfile/{userId}', 'PatientProfileController@show')->name('profile.destroy');
 
 

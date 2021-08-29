@@ -17,8 +17,9 @@
 
         <div class="card">
 
-            {!! Form::model($data, ['route' => ['profile.update', $data->id], 'method' => 'PUT', 'files' => true]) !!}
-
+            {!! Form::model($data, ['route' => ['profile.update', $data->id], 'method' => 'post', 'files' => true]) !!}
+          
+            @csrf
             <div class="card-body">
                 <div class="row">
                     @include('profile.fields')

@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="{{ route('profile.edit', [$data->id]) }}">
+                       href="{{ route('profile.edit',[$data->id]) }}">
                         Edit
                     </a>
                 </div>
@@ -19,7 +19,6 @@
 
     <div class="content px-3">
         <div class="card">
-
             <div class="card-body">
                 <div class="row">
                     @include('profile.show_fields')

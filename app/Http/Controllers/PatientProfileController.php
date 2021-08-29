@@ -92,35 +92,35 @@ class PatientProfileController extends Controller
      */
     public function show($id)
     {
-        $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
-            // $dat = $request['data']['patientProfile'];
-            $dat = json_decode($request->getBody());
-            $data = $dat->data->patientProfile;
-            $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
-                     // for weights 
+        $request = Http::get('http://waaasil.com/care/api/patients/' . $id);
+        // $dat = $request['data']['patientProfile'];
+        $dat = json_decode($request->getBody());
+        $data = $dat->data->patientProfile;
+        $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
+        // for weights 
 
-            $arrayData =last($dat->data->patientProfile->weights);
-            // $lastWeighte =$arrayData->weight;
-            // // dd($arrayData->date);
-            // $end = Carbon::parse($arrayData->date); 
-            // $current = Carbon::now();
-            // $length = $end->diff($current)->d;
-            if (empty($arrayData)){
-                $lastWeighte = 0;
-                $length = Carbon::now();
-            }else{
-                $lastWeighte =$arrayData->weight;
-                $end = Carbon::parse($arrayData->date); 
-                $current = Carbon::now();
-                $length = $end->diff($current)->d;
-            }
-            if (empty($data)) {
-                Flash::error('Patient not found');
-    
-                // return redirect(route('profile.index'));
-            }
-    
-            return view('profile.show',compact('data','age','length','lastWeighte'));
+        $arrayData = last($dat->data->patientProfile->weights);
+        // $lastWeighte =$arrayData->weight;
+        // // dd($arrayData->date);
+        // $end = Carbon::parse($arrayData->date); 
+        // $current = Carbon::now();
+        // $length = $end->diff($current)->d;
+        if (empty($arrayData)) {
+            $lastWeighte = 0;
+            $length = Carbon::now();
+        } else {
+            $lastWeighte = $arrayData->weight;
+            $end = Carbon::parse($arrayData->date);
+            $current = Carbon::now();
+            $length = $end->diff($current)->d;
+        }
+        if (empty($data)) {
+            flash()->error('Patient not found');
+
+            // return redirect(route('profile.index'));
+        }
+
+        return view('profile.show', compact('data', 'age', 'length', 'lastWeighte'));
     }
 
     /**
@@ -131,36 +131,32 @@ class PatientProfileController extends Controller
      */
     public function edit($id)
     {
-        $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
+        $request = Http::get('http://waaasil.com/care/api/patients/' . $id);
         $dat = json_decode($request->getBody());
         $data = $dat->data->patientProfile;
 
         $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
-                     // for weights 
+        // for weights 
 
-            $arrayData =last($dat->data->patientProfile->weights);
-            
-            if (empty($arrayData)){
-                $lastWeighte = 0;
-                $length = Carbon::now();
-            }else{
-                $lastWeighte =$arrayData->weight;
-                $end = Carbon::parse($arrayData->date); 
-                $current = Carbon::now();
-                $length = $end->diff($current)->d;
-            }
-            // dd($arrayData->date);
-            // $end = Carbon::parse($arrayData->date); 
-            // $current = Carbon::now();
-            // $length = $end->diff($current)->d;
+        $arrayData = last($dat->data->patientProfile->weights);
+
+        if (empty($arrayData)) {
+            $lastWeighte = 0;
+            $length = Carbon::now();
+        } else {
+            $lastWeighte = $arrayData->weight;
+            $end = Carbon::parse($arrayData->date);
+            $current = Carbon::now();
+            $length = $end->diff($current)->d;
+        }
+
         if (empty($data)) {
             Flash::error('Profile not found');
 
             return redirect(route('profile.show'));
         }
-
-        return view('profile.edit',compact('data','age','length','lastWeighte'));
-
+        // dd($data);
+        return view('profile.edit', compact('data', 'age', 'length', 'lastWeighte'));
     }
 
     /**
@@ -172,32 +168,27 @@ class PatientProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-
-        $response = Http::put('http://waaasil.com/care/api/patients/'.$id, [
+        //   dd($request);
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+        ])->put('http://waaasil.com/care/api/patients/' . $id, [
             // 'id' => $request->id,
             'name' => $request->name,
-            'state_id' => $request->state_id,
-            // 'address' => $request->address,
-            'height' => 1,
-            'image' =>  $request->image,
+            'state_id' => 2,
+            'address' => $request->address,
+            'height' => $request->height,
+            // 'image' =>  $request->image,
             'blood_group' => $request->blood_group,
             'date_of_birth' => $request->date_of_birth,
             'weight' => $request->weight,
-            'date ' => $request->date,
-         ]);
-        //  dd($response);
-        $data =json_decode($response->getBody(), true);
-        $saveData=$data;
-        dd( $saveData);
+            'date' => $request->date,
+        ]);
+
+        $data = json_decode($response->body());
         // dd($data);
         if ($data->code == 200) {
-            dd($data);
-
-            return view('profile.show');
-            // session()->flash('');
-        } else {
-            dd($data);
-
+            return view('profile.show',[$id]);
+        } else {    
             return redirect('errors.404');
         }
     }
@@ -210,6 +201,5 @@ class PatientProfileController extends Controller
      */
     public function destroy($id)
     {
-     
     }
 }
