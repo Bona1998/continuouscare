@@ -1,70 +1,3 @@
-{{-- <!-- Name Field -->
-<div class="col-sm-12">
-
-    <p>{{$data->name}}</p>
-</div>
-
-<!-- Description Field -->
-<div class="col-sm-12">
-   
-    <p>{{$data->email}}</p>
-</div>
-
-<div class="col-sm-12">
-    <p>{{$data->user_phone}}</p>
-</div>
-
-<div class="col-sm-12">
-    <p>{{$data->address}}</p>
-</div>
-
-<div class="col-sm-12">
-    <p>{{$data->gender->type}}</p>
-</div>
-
-<div class="col-sm-12">
-    <p>{{$data->state->name}}</p>
-</div>
-
-<div class="col-sm-12">
-    <p>{{$data->patient->blood_group}}</p>
-</div>
-
-<div class="col-sm-12">
-    <p>{{$data->patient->date_of_birth}}</p>
-</div>
-
-<div class="col-sm-12">
-    <p>{{$data->patient->height}}</p>
-</div> --}}
-
-
-{{-- <!-- Created At Field -->
-<div class="col-sm-12">
-    {!! Form::label('created_at', 'Created At:') !!}
-    <p>{{ $services->created_at }}</p>
-</div>
-
-<!-- Updated At Field -->
-<div class="col-sm-12">
-    {!! Form::label('updated_at', 'Updated At:') !!}
-    <p>{{ $services->updated_at }}</p>
-</div> --}}
-{{-- 
-{{$data->name}}
-{{$data->email}}
-{{$data->user_phone}}
-{{$data->address}}
-{{$data->gender->type}}
-{{$data->state->name}}
-{{$data->patient->blood_group}}
-{{$data->patient->date_of_birth}}
-{{$data->patient->height}}
-@foreach ($data->weights as $item)
-   {{$item->weight}}
-   {{$item->date}}
- @endforeach --}}
- <!-- component -->
 <style>
     :root {
         --main-color: #4a76a8;
@@ -95,49 +28,12 @@
                 <a href="#"
                     class="text-lg font-semibold tracking-widest uppercase rounded-lg focus:outline-none focus:shadow-outline">{{$data->name}}
                     profile</a>
-                {{-- <button class="md:hidden rounded-lg focus:outline-none focus:shadow-outline" @click="open = !open">
-                    <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
-                        <path x-show="!open" fill-rule="evenodd"
-                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                            clip-rule="evenodd"></path>
-                        <path x-show="open" fill-rule="evenodd"
-                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </button> --}}
+           
             </div>
             <nav :class="{'flex': open, 'hidden': !open}"
                 class="flex-col flex-grow pb-4 md:pb-0 hidden md:flex md:justify-end md:flex-row">
                 <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                    {{-- <button @click="open = !open"
-                        class="flex flex-row items-center space-x-2 w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent hover:bg-blue-800 md:w-auto md:inline md:mt-0 md:ml-4 hover:bg-gray-200 focus:bg-blue-800 focus:outline-none focus:shadow-outline">
-                        {{-- <span>{{$data->name}}</span> -}}
-                        <img class="inline h-6 rounded-full"
-                            src="https://avatars2.githubusercontent.com/u/24622175?s=60&amp;v=4">
-                        <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}"
-                            class="inline w-4 h-4 transition-transform duration-200 transform">
-                            <path fill-rule="evenodd"
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button> --}}
-                    {{-- <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                        x-transition:enter-start="transform opacity-0 scale-95"
-                        x-transition:enter-end="transform opacity-100 scale-100"
-                        x-transition:leave="transition ease-in duration-75"
-                        x-transition:leave-start="transform opacity-100 scale-100"
-                        x-transition:leave-end="transform opacity-0 scale-95"
-                        class="absolute right-0 w-full mt-2 origin-top-right rounded-md shadow-lg md:w-48">
-                        <div class="py-2 bg-white text-blue-800 text-sm rounded-sm border border-main-color shadow-sm">
-                            <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                href="#">Settings</a>
-                            <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                href="#">Help</a>
-                            <div class="border-b"></div>
-                            <a class="block px-4 py-2 mt-2 text-sm bg-white md:mt-0 focus:text-gray-900 hover:bg-indigo-100 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                                href="#">Logout</a>
-                        </div>
-                    </div> --}}
+                
                 </div>
             </nav>
         </div>
@@ -217,10 +113,12 @@
                         <span class="tracking-wide">About</span>
                     </div>
                     <div class="text-gray-700">
-                        <div class="grid md:grid-cols-2 text-sm">
+                        <div class="grid md:grid-cols-2 text-l">
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold"> Name</div>
-                                <div class="px-4 py-2">{{$data->name}}</div>
+                                {{-- <div class="px-4 py-2">{{$data->name}}</div> --}}
+                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="name" name="name" type="text"
+                                required="" placeholder="Your Name" aria-label="{{$data->name}}" value="{{$data->name}}">
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Gender</div>
@@ -228,23 +126,27 @@
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Contact No.</div>
-                                <div class="px-4 py-2">{{$data->user_phone}}</div>
+                                {{-- <div class="px-4 py-2">{{$data->user_phone}}</div> --}}
+                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="user_phone" name="user_phone" type="text"
+                                required="" placeholder="Contact No." aria-label="{{$data->user_phone}}" value="{{$data->user_phone}}">
                             </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Current Address</div>
-                                @isset($data->address)
-                                <div class="px-4 py-2">{{$data->address}}</div>  
-                                @endisset
-                            </div>
+                                {{-- <div class="px-4 py-2">{{$data->address}}</div> --}}
+                                {{-- @isset($data->address) --}}
+                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="address" name="address" type="text"
+                                required="" placeholder="Current Address" aria-label="{{$data->address}}" value="{{$data->address}}"> 
+                                {{-- @endisset --}}
                             
+                            </div>
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Height</div>
-                                @isset($data->patient->height)
-                                <div class="px-4 py-2">{{$data->patient->height}}</div>
-                                @endisset
+                                {{-- <div class="px-4 py-2">{{$data->patient->height}}</div> --}}
+                                {{-- @isset($data->patient->height) --}}
+                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="height" name="height" type="text"
+                                required="" placeholder="Height" aria-label="{{$data->patient->height}}" value="{{$data->patient->height}}">
+                                {{-- @endisset --}}
                             </div>
-                           
-                          
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email.</div>
                                 <div class="px-4 py-2">
@@ -252,25 +154,51 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Age</div>
-                                @isset($age)
-                                <div class="px-4 py-2">{{$age}} Years</div>  
-                                @endisset
+                                <div class="px-4 py-2 font-semibold">Birth Date</div>
+                                {{-- <div class="px-4 py-2">{{$age}} Years</div> --}}
+                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="date_of_birth" name="date_of_birth" type="date"
+                                required="" placeholder="MM/YY CVC" aria-label="date_of_birth" value="{{$data->patient->date_of_birth}}">
                             </div>
                             <div class="grid grid-cols-2">
                                
-                               <div class="px-4 py-2 font-semibold">Weight</div>
-                               @isset($lastWeighte)
-                               <div class="px-4 py-2">{{$lastWeighte}}</div> 
-                               @endisset
-                               
-                               <div class="px-4 py-2 font-semibold">Weight Change </div>
-                               @isset($length)
-                               <div class="px-4 py-2">Befor {{$length}} days ago</div> 
-                               @endisset
-                             
-                               
+                                <div class="px-4 py-2 font-semibold">Weight</div>
+                                {{-- <div class="px-4 py-2">{{$lastWeighte}}</div> --}}
+                                @isset($lastWeighte)
+                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="weight" name="weight" type="text"
+                                required="" placeholder="Weight" aria-label="{{$lastWeighte}}" value="{{$lastWeighte}}">
+                                @endisset
+                            
+                                <div class="px-4 py-2 font-semibold">The day you Weight</div>
+                                {{-- <div class="px-4 py-2">Befor {{$length}} days ago</div> --}}
+                                @isset($length)
+                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="date_of_birth" name="date" type="date"
+                                required="" placeholder="MM/YY CVC" aria-label="{{$length}}" value="{{$length}}"  >
                                 
+                                @endisset
+                             
+                            </div>
+
+
+                            <label for="blood_group">bloodGroup</label>
+                            <div class="relative inline-flex">
+                                <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 412 232">
+                                    <path
+                                        d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                                        fill="#648299" fill-rule="nonzero" />
+                                </svg>
+                                <select name="blood_group" id="blood_group"
+                                    class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                                    <option>Choose a Blood Group</option>
+                                    <option value=AB->AB-</option>
+                                    <option value=AB+>AB+</option>
+                                    <option value=A+>A+</option>
+                                    <option value=B+>B+</option>
+                                    <option value=O+>O+</option>
+                                    <option value=O->O-</option>
+                                    <option value=B->B-</option>
+                                    <option value=A->A-</option>
+                                </select>
                             </div>
                         </div>
                     </div>

@@ -13,6 +13,10 @@ use Illuminate\Support\ViewErrorBag;
 use Symfony\Component\VarDumper\Cloner\Data;
 use Illuminate\Support\Str;
 use App\Http\Controllers\localStorage;
+use Carbon\Carbon;
+use App\Http\Controllers\DateTime;
+
+use function GuzzleHttp\json_decode;
 
 $st;
 class RegisterController extends Controller
@@ -91,14 +95,25 @@ class RegisterController extends Controller
         $i=3;
         // dd( $id);
         if ($saveData->code == 200) {
-            $request =Http::get('http://waaasil.com/care/api/patients/3');
+            $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
+
             // $dat = $request['data']['patientProfile'];
             $dat = json_decode($request->getBody());
+            //  dd($dat);
             $data = $dat->data->patientProfile;
-            //  dd($data);
-            //  $data = $dat['data']['patientProfile'];
-            //  dd($data);
-            //  dd(dat['data']['patientProfile']);
+            // $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
+
+
+
+            //          // for weights 
+            // $arrayData =last($dat->data->patientProfile->weights);
+            // dd($arrayData);
+            // $lastWeighte =$arrayData->weight;
+            // // dd($arrayData->date);
+            // $end = Carbon::parse($arrayData->date); 
+            // $current = Carbon::now();
+            // $length = $end->diff($current)->d;
+      
             return view('profile.show', compact('id', 'token','data'));
         } else {
             return view('errors.403');

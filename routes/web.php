@@ -5,7 +5,7 @@ use Illuminate\Routing\RouteGroup;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
-
+use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,14 +22,22 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 Route::get('/role', function () {
-    $id =3;
-    $request =Http::get('http://waaasil.com/care/api/patients/3');
-    // $dat = $request['data']['patientProfile'];
-    $dat = json_decode($request->getBody());
-    dd($dat);
-  $response = Http::get('http://waaasil.com/care/api/patients/$id');
-    $data= json_decode($response->getBody());
-    dd($data['data']);
+    $response = Http::post('http://waaasil.com/care/api/patients/3', [
+        // 'userId' => $request->userId,
+        'name' => 'name',
+        'state_id' => 1,
+        'address' => 'name',
+         'height' => 6,
+        'image' => 'name',
+        'blood_group' => 'name',
+        'date_of_birth' =>2020-9-8,
+        'weight' => 9,
+        'date ' => 2020-9-8,
+     ]);
+
+     $data =json_decode($response->getBody(), true);
+     $saveData=$data;
+     dd( $saveData);
 });
 // Route::get('/space', function () {
 //     $response = Http::get('http://waaasil.com/care/api/specialization');
@@ -59,10 +67,11 @@ Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
 // Profile
 
 Route::get('/profile', 'PatientProfileController@create')->name('profile.create');
-Route::post('/profile/{userId}', 'PatientProfileController@index')->name('profile.index');
-Route::post('/profile', 'PatientProfileController@store')->name('profile.store');
-Route::get('/showProfile{userId}', 'PatientProfileController@show')->name('profile.show');
-Route::get('/destroyProfile{userId}', 'PatientProfileController@show')->name('profile.destroy');
+// Route::post('/profile/{userId}', 'PatientProfileController@index')->name('profile.index');
+Route::get('/profile/{userId}', 'PatientProfileController@edit')->name('profile.edit');
+Route::post('/updateProfile/{userId}', 'PatientProfileController@update')->name('profile.update');
+Route::get('/showProfile/{userId}', 'PatientProfileController@show')->name('profile.show');
+Route::get('/destroyProfile/{userId}', 'PatientProfileController@show')->name('profile.destroy');
 
 
 Route::get('/otp', 'otpController@index')->name('otp');

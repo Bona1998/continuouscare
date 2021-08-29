@@ -9,7 +9,7 @@
                 </div>
                 <div class="col-sm-6">
                     <a class="btn btn-default float-right"
-                       href="#">
+                       href="{{ route('profile.edit', [$data->id]) }}">
                         Edit
                     </a>
                 </div>

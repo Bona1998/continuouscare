@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Profile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
+use Carbon\Carbon;
 use function GuzzleHttp\json_decode;
 
 class PatientProfileController extends Controller
@@ -92,17 +92,35 @@ class PatientProfileController extends Controller
      */
     public function show($id)
     {
-        $request =Http::get('http://waaasil.com/care/api/patients/3');
+        $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
             // $dat = $request['data']['patientProfile'];
             $dat = json_decode($request->getBody());
             $data = $dat->data->patientProfile;
+            $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
+                     // for weights 
+
+            $arrayData =last($dat->data->patientProfile->weights);
+            // $lastWeighte =$arrayData->weight;
+            // // dd($arrayData->date);
+            // $end = Carbon::parse($arrayData->date); 
+            // $current = Carbon::now();
+            // $length = $end->diff($current)->d;
+            if (empty($arrayData)){
+                $lastWeighte = 0;
+                $length = Carbon::now();
+            }else{
+                $lastWeighte =$arrayData->weight;
+                $end = Carbon::parse($arrayData->date); 
+                $current = Carbon::now();
+                $length = $end->diff($current)->d;
+            }
             if (empty($data)) {
                 Flash::error('Patient not found');
     
                 // return redirect(route('profile.index'));
             }
     
-            return view('profile.show')->with('data', $data);
+            return view('profile.show',compact('data','age','length','lastWeighte'));
     }
 
     /**
@@ -111,9 +129,37 @@ class PatientProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($userId)
+    public function edit($id)
     {
-        // $userId = Http::get('http://waaasil.com/care/api/newUser')->first();
+        $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
+        $dat = json_decode($request->getBody());
+        $data = $dat->data->patientProfile;
+
+        $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
+                     // for weights 
+
+            $arrayData =last($dat->data->patientProfile->weights);
+            
+            if (empty($arrayData)){
+                $lastWeighte = 0;
+                $length = Carbon::now();
+            }else{
+                $lastWeighte =$arrayData->weight;
+                $end = Carbon::parse($arrayData->date); 
+                $current = Carbon::now();
+                $length = $end->diff($current)->d;
+            }
+            // dd($arrayData->date);
+            // $end = Carbon::parse($arrayData->date); 
+            // $current = Carbon::now();
+            // $length = $end->diff($current)->d;
+        if (empty($data)) {
+            Flash::error('Profile not found');
+
+            return redirect(route('profile.show'));
+        }
+
+        return view('profile.edit',compact('data','age','length','lastWeighte'));
 
     }
 
@@ -124,27 +170,33 @@ class PatientProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $userId)
+    public function update(Request $request, $id)
     {
 
-        $response = Http::post('http://waaasil.com/care/api/patients/3', [
-            'userId' => $request->userId,
+        $response = Http::put('http://waaasil.com/care/api/patients/'.$id, [
+            // 'id' => $request->id,
             'name' => $request->name,
             'state_id' => $request->state_id,
-            'address' => $request->address,
-            'height' => $request->height,
-            'weight' => $request->weight,
-            'date ' => $request->date,
+            // 'address' => $request->address,
+            'height' => 1,
+            'image' =>  $request->image,
             'blood_group' => $request->blood_group,
             'date_of_birth' => $request->date_of_birth,
-        ]);
+            'weight' => $request->weight,
+            'date ' => $request->date,
+         ]);
+        //  dd($response);
+        $data =json_decode($response->getBody(), true);
+        $saveData=$data;
+        dd( $saveData);
+        // dd($data);
+        if ($data->code == 200) {
+            dd($data);
 
-        $data = json_decode($response->getBody());
-
-        if ($$data->code == 200) {
-            return view('comingSoon');
+            return view('profile.show');
             // session()->flash('');
         } else {
+            dd($data);
 
             return redirect('errors.404');
         }
@@ -158,19 +210,6 @@ class PatientProfileController extends Controller
      */
     public function destroy($id)
     {
-        $request =Http::get('http://waaasil.com/care/api/patients/84');
-        $dat = json_decode($request->getBody());
-        $data = $dat->data->patientProfile;
-        if (empty($data )) {
-            Flash::error('Profile not found');
-
-            // return redirect(route('services.index'));
-        }
-
-        $data->delete(84);
-
-        Flash::success('Services deleted successfully.');
-
-        return redirect(route('services.index'));
+     
     }
 }
