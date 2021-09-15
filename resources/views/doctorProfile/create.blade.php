@@ -31,10 +31,10 @@
                 <select name="stateId" id="stateId"
                     class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option>Choose a state</option>
-                    @foreach ($allState as $item)
+                    {{-- @foreach ($allState as $item)
                         <option value={{ $item['stateId'] }}>{{ $item['stateName'] }}</option>
                     @endforeach
-                </select>
+                </select> --}}
             </div>
 
 
@@ -49,9 +49,9 @@
                 <select name="rolejob_id" id="rolejob_id"
                     class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option>Choose your Roles</option>
-                    @foreach ($allRoles as $item)
+                    {{-- @foreach ($allRoles as $item)
                         <option value={{ $item['roleJobId'] }}>{{ $item['roleJobName'] }}</option>
-                    @endforeach
+                    @endforeach --}}
                 </select>
             </div>
 
@@ -67,9 +67,9 @@
                 <select name="specialized_id" id="specialized_id"
                     class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
                     <option>Choose your Specilaziton</option>
-                    @foreach ($allSpecialization as $item)
+                    {{-- @foreach ($allSpecialization as $item)
                         <option value={{ $item['specializationId'] }}>{{ $item['specializationName'] }}</option>
-                    @endforeach
+                    @endforeach --}}
                 </select>
             </div>
 

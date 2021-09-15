@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
+use Carbon\Carbon;
+use function GuzzleHttp\json_decode;
 
 class PatientLoginController extends Controller
 {
@@ -42,12 +44,33 @@ class PatientLoginController extends Controller
             'user_type' => 2,
         ]);
 
-        $data = json_decode($response->getBody());
-         dd($data);
+        $dat = json_decode($response->getBody());
+        //  dd($data);
+        $res = json_decode($response->getBody());
+        $saveData=$res;
+         //dd($saveData);
+        $token= $saveData->data->token;
+        session(['token' => $token]);
+        $token = session('token');
+        $id=$saveData->data->userId;
+    
 
+        if ($dat->code == 200) {
+            $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
+            $dat = json_decode($request->getBody());
+            $data = $dat->data->patientProfile;
+            $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
 
-        if ($data->code == 200) {
-            return view('comingSoon');
+            // for weights 
+             $arrayData =last($dat->data->patientProfile->weights);
+   // dd($arrayData);
+             $lastWeighte =$arrayData->weight;
+   // dd($arrayData->date);
+             $end = Carbon::parse($arrayData->date); 
+             $current = Carbon::now();
+             $length = $end->diff($current)->d;
+
+            return view('profile.show',compact('data','age','lastWeighte','length'));
         } else {
             return back()->withErrors(['Hmmm!', 'Sorry your credintioal dosn\'t  match our recorders !']);
         }
@@ -61,7 +84,7 @@ class PatientLoginController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

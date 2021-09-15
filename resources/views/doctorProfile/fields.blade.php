@@ -51,8 +51,8 @@
                             src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg"
                             alt=""> --}}
                             
-                            <img id="output" class="h-auto w-full mx-auto" src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg">
-                            <input type="file"name="image" onchange="loadFile(event)" >
+                            <img id="output" name="image" class="h-auto w-full mx-auto" src="https://lavinephotography.com.au/wp-content/uploads/2017/01/PROFILE-Photography-112.jpg">
+                            <input type="file" name="image" onchange="loadFile(event)" >
                     </div>
                     {{-- <h1 class="text-gray-900 font-bold text-xl leading-8 my-1">{{$data->name}}</h1> --}}
                  
@@ -85,10 +85,6 @@
                                 required="" placeholder="Your Name" aria-label="{{$data->name}}" value="{{$data->name}}">
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Gender</div>
-                                <div class="px-4 py-2">{{$data->gender->type}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Contact No.</div>
                                 {{-- <div class="px-4 py-2">{{$data->user_phone}}</div> --}}
                                 <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="user_phone" name="user_phone" type="text"
@@ -104,68 +100,13 @@
                             
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Height</div>
-                                {{-- <div class="px-4 py-2">{{$data->patient->height}}</div> --}}
-                                {{-- @isset($data->patient->height) --}}
-                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="height" name="height" type="text"
-                                required="" placeholder="Height" aria-label="{{$data->patient->height}}" value="{{$data->patient->height}}">
-                                {{-- @endisset --}}
-                            </div>
-                            <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email.</div>
                                 <div class="px-4 py-2">
                                     <a class="text-blue-800" href="mailto:jane@example.com">{{$data->email}}</a>
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Birth Date</div>
-                                {{-- <div class="px-4 py-2">{{$age}} Years</div> --}}
-                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="date_of_birth" name="date_of_birth" type="date"
-                                required="" placeholder="MM/YY CVC" aria-label="{{$data->patient->date_of_birth}}" value="{{$data->patient->date_of_birth}} ">
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">bloodGroup</div>
-                                {{-- <div class="px-4 py-2">{{$age}} Years</div> --}}
-                                <div class="relative inline-flex">
-                                    {{-- <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 412 232">
-                                        <path
-                                            d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
-                                            fill="#648299" fill-rule="nonzero" />
-                                    </svg> --}}
-                                    <select name="blood_group" id="blood_group"
-                                        class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
-                                        <option>Select</option>
-                                        <option value=AB->AB-</option>
-                                        <option value=AB+>AB+</option>
-                                        <option value=A+>A+</option>
-                                        <option value=B+>B+</option>
-                                        <option value=O+>O+</option>
-                                        <option value=O->O-</option>
-                                        <option value=B->B-</option>
-                                        <option value=A->A-</option>
-                                    </select>
-                                </div></div>
-
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Weight</div>
-                                {{-- <div class="px-4 py-2">{{$lastWeighte}}</div> --}}
-                                @isset($lastWeighte)
-                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="weight" name="weight" type="text"
-                                required="" placeholder="Weight" aria-label="{{$lastWeighte}}" value="{{$lastWeighte}}">
-                                @endisset
-                            
-                                <div class="px-4 py-2 font-semibold">The day you Weight</div>
-                                {{-- <div class="px-4 py-2">Befor {{$length}} days ago</div> --}}
-                                @isset($length)
-                                <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="date" name="date" type="date"
-                                required="" placeholder="MM/YY CVC" aria-label="{{$length}}" value="{{$length}}"  >
-                                @endisset
-                            </div>
-                            <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">State</div>
-                                {{-- <div class="px-4 py-2">{{$data->patient->height}}</div> --}}
-                                {{-- @isset($data->patient->height) --}}
                                 <div class="relative inline-flex">
                                     <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"
                                         viewBox="0 0 412 232">
@@ -181,10 +122,49 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                {{-- <input class="w-full px-4 py-2 text-gray-700 bg-gray-200 rounded" id="height" name="height" type="text"
-                                required="" placeholder="Height" aria-label="{{$data->patient->height}}" value="{{$data->patient->height}}"> --}}
-                                {{-- @endisset --}}
                             </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-2 font-semibold">Specialization</div>
+                                <div class="relative inline-flex">
+                                    <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 412 232">
+                                        <path
+                                            d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                                            fill="#648299" fill-rule="nonzero" />
+                                    </svg>
+                                    <select name="specialization_id" id="specialization_id"
+                                        class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                                        <option>Choose a Specialist</option>
+                                        @foreach ($specialization as $item)
+                                            <option value={{ $item->id }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-2 font-semibold">Role</div>
+                                <div class="relative inline-flex">
+                                    <svg class="w-2 h-2 absolute top-0 right-0 m-4 pointer-events-none" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 412 232">
+                                        <path
+                                            d="M206 171.144L42.678 7.822c-9.763-9.763-25.592-9.763-35.355 0-9.763 9.764-9.763 25.592 0 35.355l181 181c4.88 4.882 11.279 7.323 17.677 7.323s12.796-2.441 17.678-7.322l181-181c9.763-9.764 9.763-25.592 0-35.355-9.763-9.763-25.592-9.763-35.355 0L206 171.144z"
+                                            fill="#648299" fill-rule="nonzero" />
+                                    </svg>
+                                    <select name="role_id" id="role_id"
+                                        class="border border-gray-300 rounded-full text-gray-600 h-10 pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none">
+                                        <option>Choose a Role</option>
+                                        @foreach ($role as $item)
+                                            <option value={{ $item->id }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="inline-block mt-2 -mx-1 pl-1 w-1/2">
+                                <label class="hidden block text-sm text-gray-600" for="cus_email">Bio</label>
+                                <textarea class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded" id="bio" name="bio" type="text"
+                                    required="" placeholder="" aria-label="Bio"></textarea>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -198,6 +178,7 @@
         </div>
     </div>
 </div>
+
 <script>
     var loadFile = function(event){
         var output = document.getElementById('output');

@@ -79,18 +79,26 @@ class DoctorController extends Controller
 
         ]);
     
-        $data = json_decode($response->getBody());
-        dd($data);
-        // // $id = $data->userId;
-        //  $id = $data->data->userId;
-        //  $token=$data->data->token;
-        if ($data->code == 200) {
-            dd($data);
-            return view('doctorProfile.create', compact('id','token'));
-        } else {
-            return view('errors.403');
-        }
+        $res = json_decode($response->getBody());
+        $saveData=$res;
+        //dd($saveData);
+       $token= $saveData->data->token;
+       session(['token' => $token]);
+       $token = session('token');
+       $id=$saveData->data->userId;
+       if ($saveData->code == 200) {
+        $request =Http::get('http://waaasil.com/care/api/doctors/'.$id);
+
+        // $dat = $request['data']['patientProfile'];
+        $dat = json_decode($request->getBody());
+        //  dd($dat);
+        $data = $dat->data->doctorProfile;
+  
+        return view('doctorProfile.show', compact('id', 'token','data'));
+    } else {
         return view('errors.403');
+    }
+        
     }
 
     /**

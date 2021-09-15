@@ -79,10 +79,6 @@
                                 <div class="px-4 py-2">{{$data->name}}</div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Gender</div>
-                                <div class="px-4 py-2">{{$data->gender->type}}</div>
-                            </div>
-                            <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Contact No.</div>
                                 <div class="px-4 py-2">{{$data->user_phone}}</div>
                             </div>
@@ -92,15 +88,7 @@
                                 <div class="px-4 py-2">{{$data->address}}</div>  
                                 @endisset
                             </div>
-                            
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Height</div>
-                                @isset($data->patient->height)
-                                <div class="px-4 py-2">{{$data->patient->height}}</div>
-                                @endisset
-                            </div>
                            
-                          
                             <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">Email.</div>
                                 <div class="px-4 py-2">
@@ -108,33 +96,27 @@
                                 </div>
                             </div>
                             <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Age</div>
-                                @isset($age)
-                                <div class="px-4 py-2">{{$age}} Years</div>  
-                                @endisset
-                            </div>
-                            <div class="grid grid-cols-2">
-                                <div class="px-4 py-2 font-semibold">Blood Group</div>
-                                @isset($age)
-                                <div class="px-4 py-2">{{$data->patient->blood_group}}</div>  
-                                @endisset
-                            </div>
-                            <div class="grid grid-cols-2">
-                               <div class="px-4 py-2 font-semibold">Weight</div>
-                               @isset($lastWeighte)
-                               <div class="px-4 py-2">{{$lastWeighte}}</div> 
-                               @endisset
-                               
-                               <div class="px-4 py-2 font-semibold">Weight Change </div>
-                               @isset($length)
-                               <div class="px-4 py-2">Befor {{$length}} days ago</div> 
-                               @endisset
-                                
-                            </div>
-                            <div class="grid grid-cols-2">
                                 <div class="px-4 py-2 font-semibold">State</div>
                                 @isset($data->state)
                                 <div class="px-4 py-2">{{$data->state->name}}</div>  
+                                @endisset
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-2 font-semibold">Specialization</div>
+                                @isset($data->doctor->specialization)
+                                <div class="px-4 py-2">{{$data->doctor->specialization->name}}</div>  
+                                @endisset
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-2 font-semibold">Role</div>
+                                @isset($data->doctor->role)
+                                <div class="px-4 py-2">{{$data->doctor->role->name}}</div>  
+                                @endisset
+                            </div>
+                            <div class="grid grid-cols-2">
+                                <div class="px-4 py-2 font-semibold">BIO</div>
+                                @isset($data->doctor->bio)
+                                <div class="px-4 py-2">{{$data->doctor->bio}}</div>  
                                 @endisset
                             </div>
                         </div>

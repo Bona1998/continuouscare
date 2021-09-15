@@ -83,7 +83,13 @@ class DoctorProfileController extends Controller
      */
     public function show($id)
     {
-        //
+        $request = Http::get('http://waaasil.com/care/api/doctors/' . $id);
+        // $dat = $request['data']['patientProfile'];
+        $dat = json_decode($request->getBody());
+        $data = $dat->data->doctorProfile;
+    
+
+        return view('doctorProfile.show', compact('data'));
     }
 
     /**
@@ -94,7 +100,18 @@ class DoctorProfileController extends Controller
      */
     public function edit($id)
     {
-        return view('profile.edit',compact(34));
+        $request = Http::get('http://waaasil.com/care/api/doctors/' . $id);
+        $dat = json_decode($request->getBody());
+        $data = $dat->data->doctorProfile;
+        $state = $dat->data->states;
+        $role = $dat->data->roles;
+        $specialization = $dat->data->specializations;
+        if (empty($data)) {
+            Flash::error('Profile not found');
+
+            return redirect(route('doctorProfile.show'));
+        }
+        return view('doctorProfile.edit', compact('data','state','specialization','role'));
     }
 
     /**
@@ -106,7 +123,39 @@ class DoctorProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+        ])->put('http://waaasil.com/care/api/doctors/' . $id, [
+            // 'id' => $request->id,
+            'name' => $request->name,
+            'state_id' => $request->state_id,
+            'specialization_id' =>$request->specialization_id,
+            'role_id' => $request->role_id,
+            'bio' => $request->bio,
+            'address' => $request->address,
+            'image' =>  $request->file('image'),
+            // $image = $request->file('image'),
+            //  if($request->hasFile('img')){ $file =$request->file('img');}
+            
+        ]);
+         $image = $request->file('image');
+        $dat = json_decode($response->body());
+        // dd($image);
+         //dd( $dat->data);
+        
+        if ($dat->code == 200) {
+            $request =Http::get('http://waaasil.com/care/api/doctors/'.$id);
+            $dat = json_decode($request->getBody());
+            $data = $dat->data->doctorProfile;
+            $state = $dat->data->states;
+            $role = $dat->data->roles;
+            $specialization = $dat->data->specializations;
+            //  dd($state);
       
+            return view('doctorProfile.show',[$id],compact('data','state','specialization','role'));
+        } else {    
+            return redirect('errors.404');
+        }
     }
 
     /**

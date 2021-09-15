@@ -63,25 +63,25 @@ class PatientProfileController extends Controller
     public function store(Request $request)
 
     {
-        $id = $request->userId;
+    //     $id = $request->userId;
 
-        $response = Http::post('http://waaasil.com/care/api/updatePatientProfile', [
-            'userId' => $request->userId,
-            'fullName' => $request->fullName,
-            'stateId' => $request->stateId,
-            'address' => $request->address,
-            'hight' => $request->hight,
-            'weight' => $request->weight,
-            'bloodGroup' => $request->bloodGroup,
-            'dateOfBirth' => $request->dateOfBirth,
+    //     $response = Http::post('http://waaasil.com/care/api/updatePatientProfile', [
+    //         'userId' => $request->userId,
+    //         'fullName' => $request->fullName,
+    //         'stateId' => $request->stateId,
+    //         'address' => $request->address,
+    //         'hight' => $request->hight,
+    //         'weight' => $request->weight,
+    //         'bloodGroup' => $request->bloodGroup,
+    //         'dateOfBirth' => $request->dateOfBirth,
 
 
-        ]);
-        $data = json_decode($response->getBody());
-        if ($data->code == 200) {
-            return view('imageprofile.create', compact('id'));
-        }
-        return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
+    //     ]);
+    //     $data = json_decode($response->getBody());
+    //     if ($data->code == 200) {
+    //         return view('imageprofile.create', compact('id'));
+    //     }
+    //     return redirect('profile.create')->withErrors(['Opps', 'somethings Went Wrong']);
     }
 
     /**
@@ -134,7 +134,7 @@ class PatientProfileController extends Controller
         $request = Http::get('http://waaasil.com/care/api/patients/' . $id);
         $dat = json_decode($request->getBody());
         $data = $dat->data->patientProfile;
-
+        $state = $dat->data->states;
         $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
         // for weights 
 
@@ -144,6 +144,7 @@ class PatientProfileController extends Controller
             $lastWeighte = 0;
             $length = Carbon::now();
         } else {
+            
             $lastWeighte = $arrayData->weight;
             $end = Carbon::parse($arrayData->date);
             $current = Carbon::now();
@@ -156,7 +157,7 @@ class PatientProfileController extends Controller
             return redirect(route('profile.show'));
         }
         // dd($data);
-        return view('profile.edit', compact('data', 'age', 'length', 'lastWeighte'));
+        return view('profile.edit', compact('data', 'age', 'length', 'lastWeighte','state'));
     }
 
     /**
@@ -174,20 +175,40 @@ class PatientProfileController extends Controller
         ])->put('http://waaasil.com/care/api/patients/' . $id, [
             // 'id' => $request->id,
             'name' => $request->name,
-            'state_id' => 2,
+            'state_id' => $request->state_id,
             'address' => $request->address,
             'height' => $request->height,
-            // 'image' =>  $request->image,
+            'image' =>  $request->file('image')->store('image'),
+            $image = $request->file('image'),
+            //  if($request->hasFile('img')){ $file =$request->file('img');}
+               
             'blood_group' => $request->blood_group,
             'date_of_birth' => $request->date_of_birth,
             'weight' => $request->weight,
             'date' => $request->date,
         ]);
+        // $image = $request->file('image'),
+        $dat = json_decode($response->body());
+        // dd( $dat->data->image);
+        
+        if ($dat->code == 200) {
+            $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
+            $dat = json_decode($request->getBody());
+            $data = $dat->data->patientProfile;
+            $state = $dat->data->states;
+            // dd($state);
+             $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
 
-        $data = json_decode($response->body());
-        // dd($data);
-        if ($data->code == 200) {
-            return view('profile.show',[$id]);
+                     // for weights 
+            $arrayData =last($dat->data->patientProfile->weights);
+            // dd($arrayData);
+            $lastWeighte =$arrayData->weight;
+            // dd($arrayData->date);
+            $end = Carbon::parse($arrayData->date); 
+            $current = Carbon::now();
+            $length = $end->diff($current)->d;
+      
+            return view('profile.show',[$id],compact('data','age','lastWeighte','length','state'  ));
         } else {    
             return redirect('errors.404');
         }

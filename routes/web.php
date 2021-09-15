@@ -21,24 +21,24 @@ use Carbon\Carbon;
     
 //     return view('welcome');
 // });
-Route::get('/role', function () {
-    $response = Http::post('http://waaasil.com/care/api/patients/3', [
-        // 'userId' => $request->userId,
-        'name' => 'name',
-        'state_id' => 1,
-        'address' => 'name',
-         'height' => 6,
-        'image' => 'name',
-        'blood_group' => 'name',
-        'date_of_birth' =>2020-9-8,
-        'weight' => 9,
-        'date ' => 2020-9-8,
-     ]);
+// Route::get('/role', function () {
+//     $response = Http::post('http://waaasil.com/care/api/patients/3', [
+//         // 'userId' => $request->userId,
+//         'name' => 'name',
+//         'state_id' => 1,
+//         'address' => 'name',
+//          'height' => 6,
+//         'image' => 'name',
+//         'blood_group' => 'name',
+//         'date_of_birth' =>2020-9-8,
+//         'weight' => 9,
+//         'date ' => 2020-9-8,
+//      ]);
 
-     $data =json_decode($response->getBody(), true);
-     $saveData=$data;
-     dd( $saveData);
-});
+//      $data =json_decode($response->getBody(), true);
+//      $saveData=$data;
+//      dd( $saveData);
+// });
 // Route::get('/space', function () {
 //     $response = Http::get('http://waaasil.com/care/api/specialization');
 //     dd($response->json());
@@ -53,50 +53,54 @@ Route::get('/comingSoon', function () {
 Route::get('/new', function () {
     return view('new');
 });
+// for website page
 Route::get('/', 'WelcomeController@index')->name('/');
-Route::get('/otp', 'otpController@index')->name('otp');
-Route::post('/otp', 'otpController@store')->name('otp.store');
+Route::get('/about', 'AboutController@index')->name('about');
+Route::get('/pricing', 'PricingController@index')->name('pricing');
+
+// login page forpation and doctor 
 Route::get('/loginCustom', 'PatientLoginController@create')->name('login.create');
 Route::post('/loginCustom', 'PatientLoginController@store')->name('login.store');
+// Route::post('/loginCustom', 'PatientLoginController@store')->name('login.store');
+
 Route::post('/doctorlogin', 'DoctorLoginController@store')->name('doctorlogin.store');
 
+// registratin page for pation and doctor
 Route::get('/registerCustom', 'RegisterController@create')->name('register.create');
 Route::post('/registerCustom', 'RegisterController@store')->name('register.store');
 Route::post('/doctor', 'DoctorController@store')->name('doctor.store');
 
-// Profile
 
+
+//Pation Profile
 Route::get('/profile', 'PatientProfileController@create')->name('profile.create');
-// Route::post('/profile/{userId}', 'PatientProfileController@index')->name('profile.index');
 Route::get('/showProfile/{userId}', 'PatientProfileController@show')->name('profile.show');
 Route::get('/profile/{userId}', 'PatientProfileController@edit')->name('profile.edit');
 Route::post('/updateProfile/{userId}', 'PatientProfileController@update')->name('profile.update');
 
-Route::get('/destroyProfile/{userId}', 'PatientProfileController@show')->name('profile.destroy');
-
+//dOCTOR PROFILE
+Route::get('/doctorProfile', 'DoctorProfileController@create')->name('doctorProfile.create');
+Route::get('/showDoctorProfile/{userId}', 'DoctorProfileController@show')->name('doctorProfile.show');
+Route::get('/doctorProfile/{userId}', 'DoctorProfileController@edit')->name('doctorProfile.edit');
+Route::post('/updateDoctorProfile/{userId}', 'DoctorProfileController@update')->name('doctorProfile.update');
 
 Route::get('/otp', 'otpController@index')->name('otp');
 Route::post('/otp', 'otpController@store')->name('otp.store');
+Route::get('/otp', 'otpController@index')->name('otp');
+Route::post('/otp', 'otpController@store')->name('otp.store');
 
-Route::get('/imageprofile', 'ImagesProfile@create')->name('imageprofile.create');
-Route::post('/imageprofile', 'ImagesProfile@store')->name('imageprofile.store');
 
-Route::get('/about', 'AboutController@index')->name('about');
-Route::get('/pricing', 'PricingController@index')->name('pricing');
 // Route::get('/solution', 'SolutionController@index')->name('solution');
 
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
 // RouteGroup()
 
 
-Route::get('/doctorProfile', 'DoctorProfileController@create')->name('doctorProfile.create');
 
-Route::post('/doctorprofile', 'DoctorProfileController@store')->name('doctorProfile.store');
 
-Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+
+
 
 
 // Auth::routes(['verify' => true]);
@@ -104,6 +108,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('/home', 'HomeController@index')->middleware('verified');
 
 
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/product', 'ProductController@index')->name('product');
 Route::get('/about', 'AboutController@index')->name('about');

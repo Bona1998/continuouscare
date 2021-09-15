@@ -39,10 +39,10 @@
                                         <input type="password" class="form-control" placeholder="Password *" value=""
                                             name="password" id="password" />
                                     </div>
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <input type="password" class="form-control" placeholder="Confirm Password *"
-                                            value="" />
-                                    </div>
+                                            value=""  	field= "confirmed" required/>
+                                    </div> --}}
                                     <div class="form-group">
                                         <div class="maxl">
                                             <label class="radio inline">

@@ -17,18 +17,18 @@
 
         <div class="card">
 
-            {!! Form::model($data, ['route' => ['profile.update', $data->id], 'method' => 'post', 'enctype'=>"multipart/form-data", 'files' => true]) !!}
+            {!! Form::model($data, ['route' => ['doctorProfile.update', $data->id], 'method' => 'post', 'enctype'=>"multipart/form-data", 'files' => true]) !!}
           
             @csrf
             <div class="card-body">
                 <div class="row">
-                    @include('profile.fields')
+                    @include('doctorProfile.fields')
                 </div>
             </div>
 
             <div class="card-footer">
                 {!! Form::submit('Save', ['class' => 'btn btn-primary']) !!}
-                <a href="{{ route('profile.show', [$data->id]) }}" class="btn btn-default">Cancel</a>
+                <a href="{{ route('doctorProfile.show', [$data->id]) }}" class="btn btn-default">Cancel</a>
             </div>
 
     

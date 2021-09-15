@@ -42,16 +42,7 @@ class RegisterController extends Controller
     }
 
     /**
-     * ***************************************************
-     * http://waaasil.com/care/api/allState
-     * 
-     * **************************************************
-     * making an http request with get method to get allState
-     * 
-     * recive the respons and decode it
-     *
-     * save data to array an pass it to view
-     * 
+     
      *  **********************************************
      * http://waaasil.com/care/api/newUser
      * 
@@ -92,7 +83,7 @@ class RegisterController extends Controller
         session(['token' => $token]);
         $token = session('token');
         $id=$saveData->data->userId;
-        $i=3;
+    
         // dd( $id);
         if ($saveData->code == 200) {
             $request =Http::get('http://waaasil.com/care/api/patients/'.$id);
@@ -102,8 +93,6 @@ class RegisterController extends Controller
             //  dd($dat);
             $data = $dat->data->patientProfile;
             // $age = Carbon::parse($dat->data->patientProfile->patient->date_of_birth)->diff(Carbon::now())->y;
-
-
 
             //          // for weights 
             // $arrayData =last($dat->data->patientProfile->weights);
