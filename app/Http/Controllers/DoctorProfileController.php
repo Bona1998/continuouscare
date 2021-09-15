@@ -141,7 +141,7 @@ class DoctorProfileController extends Controller
          $image = $request->file('image');
         $dat = json_decode($response->body());
         // dd($image);
-         //dd( $dat->data);
+         dd( $dat->data->image);
         
         if ($dat->code == 200) {
             $request =Http::get('http://waaasil.com/care/api/doctors/'.$id);
